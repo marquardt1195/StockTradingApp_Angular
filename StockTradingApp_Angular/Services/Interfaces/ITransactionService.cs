@@ -4,8 +4,8 @@ namespace StockTradingApp_Angular.Services.Interfaces
 {
     public interface ITransactionService
     {
-        Task<List<Transactions>> GetAllTransactions();
+        Task<List<Transaction>> GetAllTransactions();
 
-        Task<Transactions> GetTransactionById();
+        Task<Transaction> GetTransactionById();
     }
 }

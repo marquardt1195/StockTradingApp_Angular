@@ -8,6 +8,6 @@ namespace StockTradingApp_Angular.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
 
-        public DbSet<Transactions> Transactions { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
     }
 }

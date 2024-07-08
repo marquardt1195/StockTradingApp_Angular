@@ -2,7 +2,7 @@
 
 namespace StockTradingApp_Angular.Data
 {
-    public class Transactions
+    public class Transaction
     {
         [Key]
         public int TransactionId { get; set; }

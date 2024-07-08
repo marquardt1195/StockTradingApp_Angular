@@ -18,13 +18,13 @@ namespace StockTradingApp_Angular.Controllers
         }
 
         [HttpGet("GetTransactionById")]
-        public async Task<Transactions> GetTransactionById()
+        public async Task<Data.Transaction> GetTransactionById()
         {
             return await _transactionService.GetTransactionById();
         }
 
         [HttpGet("GetAllTransactions")]
-        public async Task<List<Transactions>> GetAllTransactions()
+        public async Task<List<Data.Transaction>> GetAllTransactions()
         {
             return await _transactionService.GetAllTransactions();
         }

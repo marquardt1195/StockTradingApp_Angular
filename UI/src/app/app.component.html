@@ -5,13 +5,13 @@
 <h1>{{title}}</h1>
 
 <div *ngIf="singleTransaction$ | async as transaction">
-  <div>{{ transaction.transactionId }}</div>
+  <div>{{ transaction.TransactionId }}</div>
   <!-- Add more properties as needed -->
 </div>
 
 <!-- Display transactions list -->
 <div *ngIf="transactions$ | async as transactions">
   <div *ngFor="let item of transactions">
-    <p>{{ item.stockSymbol }}</p>
+    <p>{{ item.StockSymbol }}</p>
   </div>
 </div>

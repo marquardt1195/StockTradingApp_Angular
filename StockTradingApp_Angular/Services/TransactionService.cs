@@ -15,12 +15,12 @@ namespace StockTradingApp_Angular.Services
             _logger = logger;
         }
 
-        public async Task<List<Transactions>> GetAllTransactions()
+        public async Task<List<Transaction>> GetAllTransactions()
         {
             return await _context.Transactions.ToListAsync();
         }
 
-        public async Task<Transactions> GetTransactionById()
+        public async Task<Transaction> GetTransactionById()
         {
             return await _context.Transactions.FirstOrDefaultAsync(x => x.TransactionId == 220);
         }
