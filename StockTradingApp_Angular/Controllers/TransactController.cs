@@ -6,7 +6,7 @@ using System.Transactions;
 
 namespace StockTradingApp_Angular.Controllers
 {
-    [Route("Transact")]
+    [Route("api/Transact")]
     [ApiController]
     public class TransactController : ControllerBase
     {
@@ -15,6 +15,12 @@ namespace StockTradingApp_Angular.Controllers
         public TransactController(ITransactionService transactionService) 
         {
             _transactionService = transactionService;
+        }
+
+        [HttpGet("GetTransactionById")]
+        public async Task<Transactions> GetTransactionById()
+        {
+            return await _transactionService.GetTransactionById();
         }
 
         [HttpGet("GetAllTransactions")]

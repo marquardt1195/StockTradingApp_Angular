@@ -19,5 +19,10 @@ namespace StockTradingApp_Angular.Services
         {
             return await _context.Transactions.ToListAsync();
         }
+
+        public async Task<Transactions> GetTransactionById()
+        {
+            return await _context.Transactions.FirstOrDefaultAsync(x => x.TransactionId == 220);
+        }
     }
 }
