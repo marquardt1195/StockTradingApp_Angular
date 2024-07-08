@@ -28,5 +28,11 @@ namespace StockTradingApp_Angular.Controllers
         {
             return await _transactionService.GetAllTransactions();
         }
+
+        [HttpPost("AddTransaction")]
+        public async Task InitiateTrade()
+        {
+            await _transactionService.InitiateTrade();
+        }
     }
 }

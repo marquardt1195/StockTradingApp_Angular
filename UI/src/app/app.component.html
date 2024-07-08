@@ -1,17 +1,21 @@
 <router-outlet></router-outlet>
 
-<h1>My title</h1>
-
-<h1>{{title}}</h1>
-
-<div *ngIf="singleTransaction$ | async as transaction">
-  <div>{{ transaction.TransactionId }}</div>
-  <!-- Add more properties as needed -->
+<h2>{{title}}</h2>
+<div class="mx-4 mt-4">
+  <button (click)="showForm = !showForm" class="btn btn-success">Add New Trade</button>
 </div>
 
-<!-- Display transactions list -->
+
+<div class="container mt-5">
+  <app-add-transaction *ngIf="showForm"></app-add-transaction>
+</div>
+
+<div *ngIf="singleTransaction$ | async as transaction">
+  <div>{{ transaction.transaction_id }}</div>
+</div>
+
 <div *ngIf="transactions$ | async as transactions">
   <div *ngFor="let item of transactions">
-    <p>{{ item.StockSymbol }}</p>
+    <p>{{ item.stock_symbol }}</p>
   </div>
 </div>

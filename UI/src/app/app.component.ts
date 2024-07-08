@@ -11,8 +11,9 @@ import { AsyncPipe } from '@angular/common';
 })
 
 export class AppComponent {
-  title = "UI";
+  title = "Stock Trading App";
   http = inject(HttpClient);
+  showForm = false;
 
   //a transaction observable.. denoted by the dollar sign.
   //can make use of transactions observable in html file

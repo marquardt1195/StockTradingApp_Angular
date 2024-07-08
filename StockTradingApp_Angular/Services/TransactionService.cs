@@ -17,12 +17,16 @@ namespace StockTradingApp_Angular.Services
 
         public async Task<List<Transaction>> GetAllTransactions()
         {
-            return await _context.Transactions.ToListAsync();
+            return await _context.Transaction.ToListAsync();
         }
 
         public async Task<Transaction> GetTransactionById()
         {
-            return await _context.Transactions.FirstOrDefaultAsync(x => x.TransactionId == 220);
+            return await _context.Transaction.FirstOrDefaultAsync(x => x.transaction_id == 1001);
+        }
+
+        public async Task InitiateTrade()
+        {
         }
     }
 }

@@ -7,5 +7,7 @@ namespace StockTradingApp_Angular.Services.Interfaces
         Task<List<Transaction>> GetAllTransactions();
 
         Task<Transaction> GetTransactionById();
+
+        Task InitiateTrade();
     }
 }

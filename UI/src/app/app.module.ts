@@ -4,17 +4,18 @@ import { HttpClientModule } from '@angular/common/http'; // Import HttpClientMod
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
+  declarations: [ // Components, directives, and pipes go here
+    AppComponent, AddTransactionComponent
   ],
-  imports: [
+  imports: [ // Other modules whose exported classes are needed by component templates
     BrowserModule,
-    HttpClientModule, // Include HttpClientModule here
+    HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [], // Services go here
+  bootstrap: [AppComponent] // The main application view, called the root component, that hosts all other app views
 })
 export class AppModule { }
