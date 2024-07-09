@@ -1,6 +1,6 @@
 export interface Transaction {
 
-  transaction_id: number;
+  transaction_id?: number;
   //trade_id: number;
   stock_symbol: string;
   entry_price: number;
