@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Transaction } from '../../Models/Transaction';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
@@ -11,8 +11,8 @@ import { Observable } from 'rxjs';
 })
 export class AddTransactionComponent {
   newTradeForm: FormGroup;
-  closeNewTradeModal: boolean = false;
-
+  @Input() showForm?: boolean;
+  @Output() closeForm = new EventEmitter<void>();
   constructor(private http: HttpClient, private formBuilder: FormBuilder) {
     this.newTradeForm = this.formBuilder.group({
       transaction_id: '',
@@ -40,6 +40,7 @@ export class AddTransactionComponent {
         next: (response: any) => {
           console.log('Transaction added successfully.', response);
           this.newTradeForm.reset(); // Clear the form
+          this.closeForm.emit(); // Emit the close event
         },
         error: (error: HttpErrorResponse) => {
           console.error('Error adding trade', error);
@@ -54,6 +55,6 @@ export class AddTransactionComponent {
   }
 
   closeModal(): void {
-    this.closeNewTradeModal = true;
+    this.closeForm.emit();
   }
 }

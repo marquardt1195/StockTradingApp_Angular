@@ -7,7 +7,7 @@
 
 
 <div class="container mt-5">
-  <app-add-transaction *ngIf="showForm"></app-add-transaction>
+  <app-add-transaction *ngIf="showForm" [showForm]="showForm" (closeForm)="showForm = false"></app-add-transaction>
 </div>
 
 <!--<div *ngIf="singleTransaction$ | async as transaction">
