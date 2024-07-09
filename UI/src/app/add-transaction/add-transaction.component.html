@@ -1,48 +1,77 @@
-<div class="input-form">
-  <h2>New Transaction</h2>
-  <form>
-    <div class="container mt-4 mb-3">
-      <div class="col-md-6">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="symbol">Stock Symbol</label>
-              <input type="text" class="form-control" id="symbol" name="symbol">
+
+
+
+<div class="modal fade show d-block" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document" style="margin-top: 152px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Owner Already Exists</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-form">
+          <h2>New Transaction</h2>
+          <form [formGroup]="newTradeForm" (ngSubmit)="onSubmitNewTrade()">
+            <div class="container mt-4 mb-3">
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="transaction_id">Transaction Id</label>
+                      <input type="text" class="form-control" id="transaction_id" formControlName="transaction_id" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="symbol">Stock Symbol</label>
+                      <input type="text" class="form-control" id="symbol" formControlName="stock_symbol" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="buyprice">Buy Price</label>
+                      <input type="text" class="form-control" id="buyprice" formControlName="entry_price" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="buydate">Buy Date</label>
+                      <input type="text" class="form-control" id="buydate" formControlName="entry_date" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="buyamount"># Shares Bought</label>
+                      <input type="text" class="form-control" id="buyamount" formControlName="shares_bought" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="stoploss">$ Stop Loss</label>
+                      <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="buyprice">Buy Price</label>
-              <input type="text" class="form-control" id="buyprice" name="buyprice">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="buydate">Buy Date</label>
-              <input type="text" class="form-control" id="buydate" name="buydate">
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="buyamount"># Shares Bought</label>
-              <input type="text" class="form-control" id="buyamount" name="buyamount">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="stoploss">$ Stop Loss</label>
-              <input type="text" class="form-control" id="stoploss" name="stoploss">
-            </div>
-          </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
         </div>
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">
+          Close
+        </button>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </div>
 </div>
 
 

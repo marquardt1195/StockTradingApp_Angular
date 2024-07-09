@@ -10,12 +10,12 @@
   <app-add-transaction *ngIf="showForm"></app-add-transaction>
 </div>
 
-<div *ngIf="singleTransaction$ | async as transaction">
-  <div>{{ transaction.transaction_id }}</div>
+<!--<div *ngIf="singleTransaction$ | async as transaction">
+  <div>{{ transaction.stock_symbol }}</div>
 </div>
 
 <div *ngIf="transactions$ | async as transactions">
   <div *ngFor="let item of transactions">
     <p>{{ item.stock_symbol }}</p>
   </div>
-</div>
+</div>-->

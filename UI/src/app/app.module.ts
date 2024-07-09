@@ -5,15 +5,18 @@ import { HttpClientModule } from '@angular/common/http'; // Import HttpClientMod
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ // Components, directives, and pipes go here
-    AppComponent, AddTransactionComponent
+    AppComponent,
+    AddTransactionComponent
   ],
   imports: [ // Other modules whose exported classes are needed by component templates
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [], // Services go here
   bootstrap: [AppComponent] // The main application view, called the root component, that hosts all other app views

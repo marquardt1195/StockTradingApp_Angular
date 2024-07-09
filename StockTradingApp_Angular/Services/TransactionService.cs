@@ -22,11 +22,24 @@ namespace StockTradingApp_Angular.Services
 
         public async Task<Transaction> GetTransactionById()
         {
-            return await _context.Transaction.FirstOrDefaultAsync(x => x.transaction_id == 1001);
+            return await _context.Transaction.FirstOrDefaultAsync();
         }
 
-        public async Task InitiateTrade()
+        public async Task InitiateTrade(Transaction transaction)
         {
+            try
+            {
+                if (transaction != null)
+                {
+                    await _context.Transaction.AddAsync(transaction);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                var message = ex.Message;
+            }
+
         }
     }
 }

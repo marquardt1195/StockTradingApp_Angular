@@ -9,5 +9,9 @@ namespace StockTradingApp_Angular.Data
 
 
         public DbSet<Transaction> Transaction { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+        }
     }
 }

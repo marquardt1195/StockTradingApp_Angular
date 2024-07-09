@@ -30,9 +30,9 @@ namespace StockTradingApp_Angular.Controllers
         }
 
         [HttpPost("AddTransaction")]
-        public async Task InitiateTrade()
+        public async Task InitiateTrade(Data.Transaction transaction)
         {
-            await _transactionService.InitiateTrade();
+            await _transactionService.InitiateTrade(transaction);
         }
     }
 }
