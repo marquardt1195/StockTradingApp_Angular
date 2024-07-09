@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class AddTransactionComponent {
   newTradeForm: FormGroup;
+  closeNewTradeModal: boolean = false;
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder) {
     this.newTradeForm = this.formBuilder.group({
@@ -38,6 +39,7 @@ export class AddTransactionComponent {
       this.submitNewTrade(transaction).subscribe({
         next: (response: any) => {
           console.log('Transaction added successfully.', response);
+          this.newTradeForm.reset(); // Clear the form
         },
         error: (error: HttpErrorResponse) => {
           console.error('Error adding trade', error);
@@ -49,5 +51,9 @@ export class AddTransactionComponent {
   private submitNewTrade(transaction: Transaction): Observable<any> {
     const apiUrl = 'https://localhost:7006/api/Transact/AddTransaction';
     return this.http.post<any>(apiUrl, transaction);
+  }
+
+  closeModal(): void {
+    this.closeNewTradeModal = true;
   }
 }

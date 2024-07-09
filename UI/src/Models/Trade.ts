@@ -1,6 +1,6 @@
 export interface Trade {
 
-  trade_id: number;
+  trade_id?: number;
   stock_symbol: string;
   cost_basis: number;
   shares_bought: number;
