@@ -6,11 +6,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { HomeComponent } from './home/home.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [ // Components, directives, and pipes go here
     AppComponent,
-    AddTransactionComponent
+    AddTransactionComponent,
+    NavMenuComponent,
+    HomeComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [ // Other modules whose exported classes are needed by component templates
     BrowserModule,
