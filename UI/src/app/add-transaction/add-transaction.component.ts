@@ -12,7 +12,8 @@ import { Observable } from 'rxjs';
 export class AddTransactionComponent {
   newTradeForm: FormGroup;
   addTradeLeg: FormGroup;
-  @Input() showForm?: boolean;
+  @Input() showForm: boolean = false
+  @Input() formMode?: 'addNew' | 'addLeg'
   @Output() closeForm = new EventEmitter<void>();
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder) {
@@ -26,7 +27,9 @@ export class AddTransactionComponent {
     });
 
     this.addTradeLeg = this.formBuilder.group({
-
+      entry_price: '',
+      entry_date: '',
+      shares_bought: ''
     })
   }
 
@@ -55,8 +58,38 @@ export class AddTransactionComponent {
     }
   }
 
+  onSubmitAddTradeLeg(): void {
+    if (this.addTradeLeg.valid) {
+      const addTradeLegValues = this.addTradeLeg.value;
+
+      const transaction: Transaction = {
+        stock_symbol: addTradeLegValues.stock_symbol,
+        entry_price: parseFloat(addTradeLegValues.entry_price),
+        entry_date: new Date(addTradeLegValues.entry_date),
+        shares_bought: parseInt(addTradeLegValues.shares_bought, 10),
+        dollar_stop_loss: parseFloat(addTradeLegValues.dollar_stop_loss)
+      }
+
+      this.submitTradeLeg(transaction).subscribe({
+        next: (response: any) => {
+          console.log('Trade leg added successfully.', response);
+          this.addTradeLeg.reset(); // Clear the form
+          this.closeForm.emit(); // Emit the close event
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Error adding trade leg', error);
+        }
+      });
+    }
+  }
+
   private submitNewTrade(transaction: Transaction): Observable<any> {
     const apiUrl = 'https://localhost:7006/api/Transact/AddTransaction';
+    return this.http.post<any>(apiUrl, transaction);
+  }
+
+  private submitTradeLeg(transaction: Transaction): Observable<any> {
+    const apiUrl = '';
     return this.http.post<any>(apiUrl, transaction);
   }
 

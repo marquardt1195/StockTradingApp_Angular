@@ -1,17 +1,20 @@
 <app-nav-menu></app-nav-menu>
 <router-outlet></router-outlet>
 
-<h2>{{title}}</h2>
-
 <div class="container mt-5">
-  <app-add-transaction *ngIf="showForm" [showForm]="showForm" (closeForm)="showForm = false"></app-add-transaction>
+  <app-add-transaction
+    *ngIf="showForm"
+    [showForm]="showForm"
+    [formMode]="formMode"
+    (closeForm)="showForm = false">
+  </app-add-transaction>
 </div>
 
 <div class="container">
   <div class="row card" >
     <div class="col-lg-12">
       <div class="mb-1 mt-3">
-        <button (click)="showForm = !showForm" class="btn btn-success">Add New Trade</button>
+        <button (click)="showForm = true; formMode = 'addNew'" class="btn btn-success">Add New Trade</button>
       </div>
       <div class="row">
         <div *ngIf="transactions$ | async as transactions" class="card-body">
@@ -38,7 +41,7 @@
                     <button class="btn btn-sm btn-secondary mx-1">
                       <i class="oi oi-magnifying-glass"></i>
                     </button>
-                    <button class="btn btn-sm btn-success">
+                    <button class="btn btn-sm btn-success" (click)="showForm = true; formMode = 'addLeg'">
                       <i class="oi oi-plus"></i>
                     </button>
                     <button class="btn btn-sm btn-danger mx-1">
