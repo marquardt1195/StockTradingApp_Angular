@@ -2,21 +2,61 @@
 <router-outlet></router-outlet>
 
 <h2>{{title}}</h2>
-<div class="mx-4 mt-4">
-  <button (click)="showForm = !showForm" class="btn btn-success">Add New Trade</button>
-</div>
-
 
 <div class="container mt-5">
   <app-add-transaction *ngIf="showForm" [showForm]="showForm" (closeForm)="showForm = false"></app-add-transaction>
 </div>
 
-<!--<div *ngIf="singleTransaction$ | async as transaction">
-  <div>{{ transaction.stock_symbol }}</div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <div class="mb-3">
+        <button (click)="showForm = !showForm" class="btn btn-success">Add New Trade</button>
+      </div>
+      <div *ngIf="transactions$ | async as transactions">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr class="table-primary">
+              <th>Symbol</th>
+              <th>$ Entry Price</th>
+              <th># Shares Bought</th>
+              <th>Entry Date</th>
+              <th>$ Stop Loss</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of transactions">
+              <tr>
+                <td>{{item.stock_symbol}}</td>
+                <td>{{item.entry_price | currency: 'USD':'symbol':'1.2-2'}}</td>
+                <td>{{item.shares_bought}}</td>
+                <td>{{item.entry_date | date: 'MM/dd/yyyy'}}</td>
+                <td>{{item.dollar_stop_loss | currency: 'USD':'symbol':'1.2-2'}}</td> <!--'symbol' uses $. 1.2-2 means at least 1 digit before the decimal point, at least 2 digits after the decimal point, and at most 2 digits after the decimal point.-->
+                <td style="width: 17%; text-align: center;" >
+                  <button class="btn btn-sm btn-secondary mx-1">
+                    <i class="oi oi-magnifying-glass"></i>
+                  </button>
+                  <button class="btn btn-sm btn-success">
+                    <i class="oi oi-plus"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger mx-1">
+                    <i class="oi oi-minus"></i>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger">
+                    <i class="oi oi-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div *ngIf="transactions$ | async as transactions">
-  <div *ngFor="let item of transactions">
-    <p>{{ item.stock_symbol }}</p>
-  </div>
+
+<!--<div *ngIf="singleTransaction$ | async as transaction">
+  <div>{{ transaction.stock_symbol }}</div>
 </div>-->

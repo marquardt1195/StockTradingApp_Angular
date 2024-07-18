@@ -10,6 +10,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [ // Components, directives, and pipes go here
@@ -26,7 +27,7 @@ import { ContactComponent } from './contact/contact.component';
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [], // Services go here
+  providers: [DatePipe, CurrencyPipe], // Services go here
   bootstrap: [AppComponent] // The main application view, called the root component, that hosts all other app views
 })
 export class AppModule { }
