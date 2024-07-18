@@ -11,8 +11,10 @@ import { Observable } from 'rxjs';
 })
 export class AddTransactionComponent {
   newTradeForm: FormGroup;
+  addTradeLeg: FormGroup;
   @Input() showForm?: boolean;
   @Output() closeForm = new EventEmitter<void>();
+
   constructor(private http: HttpClient, private formBuilder: FormBuilder) {
     this.newTradeForm = this.formBuilder.group({
       transaction_id: '',
@@ -22,6 +24,10 @@ export class AddTransactionComponent {
       shares_bought: '',
       dollar_stop_loss: ''
     });
+
+    this.addTradeLeg = this.formBuilder.group({
+
+    })
   }
 
   onSubmitNewTrade(): void {
