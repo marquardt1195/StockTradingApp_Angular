@@ -14,6 +14,7 @@ export class AddTransactionComponent {
   addTradeLeg: FormGroup;
   @Input() showForm: boolean = false
   @Input() formMode?: 'addNew' | 'addLeg'
+  @Input() selectedTransaction?: Transaction
   @Output() closeForm = new EventEmitter<void>();
 
   constructor(private http: HttpClient, private formBuilder: FormBuilder) {

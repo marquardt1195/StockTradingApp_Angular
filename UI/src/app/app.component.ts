@@ -19,10 +19,10 @@ export class AppComponent {
   //a transaction observable.. denoted by the dollar sign.
   //can make use of transactions observable in html file
   transactions$ = this.getAllTransactions();
-  selectedTransaction$ = this.getTransactionById();
+  //selectedTransaction$ = this.getTransactionById();
 
   constructor() {
-    this.selectedTransaction$ = this.getTransactionById();
+  //  this.selectedTransaction$ = this.getTransactionById();
   }
 
   openAddLegForm(transaction: Transaction): void {
@@ -36,9 +36,9 @@ export class AppComponent {
     this.transactions$.subscribe(data => {
       console.log('Transactions:', data); // Log the data to inspect in browser console
     });
-    this.selectedTransaction$.subscribe(data => {
-      console.log('Transaction:', data);
-    });
+    //this.selectedTransaction$.subscribe(data => {
+    //  console.log('Transaction:', data);
+    //});
   }
 
 
