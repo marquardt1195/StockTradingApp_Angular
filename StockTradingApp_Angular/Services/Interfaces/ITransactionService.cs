@@ -9,5 +9,7 @@ namespace StockTradingApp_Angular.Services.Interfaces
         Task<Transaction> GetTransactionById();
 
         Task InitiateTrade(Transaction transaction);
+
+        Task AddTradeLeg(Transaction transaction);
     }
 }

@@ -41,5 +41,21 @@ namespace StockTradingApp_Angular.Services
             }
 
         }
+
+        public async Task AddTradeLeg(Transaction transaction)
+        {
+            try
+            {
+                if (transaction != null)
+                {
+                    await _context.Transaction.AddAsync(transaction);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                var exceptionMessage = ex.Message; 
+            }
+        }
     }
 }

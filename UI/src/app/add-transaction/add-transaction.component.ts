@@ -26,6 +26,7 @@ export class AddTransactionComponent implements OnChanges {
   ) {
     this.newTransactionForm = this.formBuilder.group({
       transaction_id: '',
+      trade_id: '',
       stock_symbol: '',
       entry_price: '',
       entry_date: '',

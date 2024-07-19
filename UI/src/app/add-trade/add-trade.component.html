@@ -23,11 +23,11 @@
                     <label for="stoploss">$ Stop Loss</label>
                     <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" required>
                     <label for="sellbasis">Sell Basis</label>
-                    <input type="text" class="form-control" id="sellbasis" formControlName="sell_basis" >
+                    <input type="text" class="form-control" id="sellbasis" formControlName="sell_basis">
                     <label for="sharessold"># Shares Sold</label>
-                    <input type="text" class="form-control" id="sharessold" formControlName="shares_sold" >
+                    <input type="text" class="form-control" id="sharessold" formControlName="shares_sold">
                     <label for="dateclosed">Date Closed</label>
-                    <input type="text" class="form-control" id="dateclosed" formControlName="date_closed" >
+                    <input type="text" class="form-control" id="dateclosed" formControlName="date_closed">
                   </div>
                 </div>
               </div>
@@ -35,6 +35,44 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Cancel</button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="formMode == 'addLeg'">
+    <form [formGroup]="addTradeLeg" (ngSubmit)="onSubmitAddTradeLeg()">
+      <div class="modal fade show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="margin-top: 152px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">Add Trade Leg to {{selectedTransaction.stock_symbol}}</h3>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+              <div class="input-form">
+                <div class="container mb-3 d-flex justify-content-center">
+                  <div class="col-md-8">
+                    <label for="tradeid">Trade ID</label>
+                    <input type="text" class="form-control" id="id" formControlName="trade_id" required>
+                    <label for="symbol">Stock Symbol</label>
+                    <input type="text" class="form-control" id="symbol" formControlName="stock_symbol" required>
+                    <label for="buyprice">Buy Price</label>
+                    <input type="text" class="form-control" id="buyprice" formControlName="entry_price" required>
+                    <label for="buydate">Buy Date</label>
+                    <input type="text" class="form-control" id="buydate" formControlName="entry_date" required>
+                    <label for="buyamount"># Shares Bought</label>
+                    <input type="text" class="form-control" id="buyamount" formControlName="shares_bought" required>
+                    <label for="stoploss">$ Stop Loss</label>
+                    <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Cancel</button>
             </div>
           </div>
         </div>

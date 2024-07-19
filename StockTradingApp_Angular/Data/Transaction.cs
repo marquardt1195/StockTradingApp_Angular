@@ -7,7 +7,7 @@ namespace StockTradingApp_Angular.Data
         [Key]
         public int transaction_id { get; set; }
 
-        //public int trade_id { get; set; }
+        public int trade_id { get; set; }
 
         public string stock_symbol { get; set; } = string.Empty;
 

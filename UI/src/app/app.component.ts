@@ -17,6 +17,7 @@ export class AppComponent {
   public showForm = false;
   public formMode!: 'addNewTrade' | 'addNewTransaction' | 'addLeg';
   public selectedTransaction!: Transaction;
+ // public selectedTrade!: Trade;
   public transactions$!: Observable<Transaction[]>;
   public trades$!: Observable<Trade[]>;
   //a transaction observable.. denoted by the dollar sign.
