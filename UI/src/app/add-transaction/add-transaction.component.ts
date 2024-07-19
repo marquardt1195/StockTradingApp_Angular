@@ -1,23 +1,29 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { Transaction } from '../../Models/Transaction';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { TransactionService } from '../services/transaction.service';
 
 @Component({
   selector: 'app-add-transaction',
   templateUrl: './add-transaction.component.html',
   styleUrls: ['./add-transaction.component.css']
 })
-export class AddTransactionComponent {
+export class AddTransactionComponent implements OnChanges {
   newTradeForm: FormGroup;
   addTradeLeg: FormGroup;
+
   @Input() showForm: boolean = false
   @Input() formMode?: 'addNew' | 'addLeg'
-  @Input() selectedTransaction?: Transaction
+  @Input() selectedTransaction!: Transaction
   @Output() closeForm = new EventEmitter<void>();
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) {
+  constructor(
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private transactionService: TransactionService
+  ) {
     this.newTradeForm = this.formBuilder.group({
       transaction_id: '',
       stock_symbol: '',
@@ -28,13 +34,28 @@ export class AddTransactionComponent {
     });
 
     this.addTradeLeg = this.formBuilder.group({
+      stock_symbol: '',
       entry_price: '',
       entry_date: '',
       shares_bought: ''
     })
   }
 
-  onSubmitNewTrade(): void {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selectedTransaction'] && this.formMode === 'addLeg') {
+      this.includeSymbolInAddTradeLegForm();
+    }
+  }
+
+  private includeSymbolInAddTradeLegForm(): void {
+    if (this.selectedTransaction) {
+      this.addTradeLeg.patchValue({
+        stock_symbol: this.selectedTransaction.stock_symbol,
+      });
+    }
+  }
+
+  public onSubmitNewTrade(): void {
     if (this.newTradeForm.valid) {
       const formValues = this.newTradeForm.value;
 
@@ -46,7 +67,7 @@ export class AddTransactionComponent {
         dollar_stop_loss: parseFloat(formValues.dollar_stop_loss)
       };
 
-      this.submitNewTrade(transaction).subscribe({
+      this.transactionService.submitNewTrade(transaction).subscribe({
         next: (response: any) => {
           console.log('Transaction added successfully.', response);
           this.newTradeForm.reset(); // Clear the form
@@ -59,7 +80,7 @@ export class AddTransactionComponent {
     }
   }
 
-  onSubmitAddTradeLeg(): void {
+  public onSubmitAddTradeLeg(): void {
     if (this.addTradeLeg.valid) {
       const addTradeLegValues = this.addTradeLeg.value;
 
@@ -71,7 +92,7 @@ export class AddTransactionComponent {
         dollar_stop_loss: parseFloat(addTradeLegValues.dollar_stop_loss)
       }
 
-      this.submitTradeLeg(transaction).subscribe({
+      this.transactionService.submitTradeLeg(transaction).subscribe({
         next: (response: any) => {
           console.log('Trade leg added successfully.', response);
           this.addTradeLeg.reset(); // Clear the form
@@ -84,17 +105,7 @@ export class AddTransactionComponent {
     }
   }
 
-  private submitNewTrade(transaction: Transaction): Observable<any> {
-    const apiUrl = 'https://localhost:7006/api/Transact/AddTransaction';
-    return this.http.post<any>(apiUrl, transaction);
-  }
-
-  private submitTradeLeg(transaction: Transaction): Observable<any> {
-    const apiUrl = '';
-    return this.http.post<any>(apiUrl, transaction);
-  }
-
-  closeModal(): void {
+  public closeModal(): void {
     this.closeForm.emit();
   }
 }

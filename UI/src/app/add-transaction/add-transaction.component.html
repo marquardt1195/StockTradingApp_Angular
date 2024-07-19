@@ -2,136 +2,77 @@
 
 <div *ngIf="showForm">
   <div *ngIf="formMode == 'addNew'">
-    <div class="modal fade show d-block" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document" style="margin-top: 152px;">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Add New Trade</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="input-form">
-              <form [formGroup]="newTradeForm" (ngSubmit)="onSubmitNewTrade()">
-                <div class="container mt-4 mb-3">
-                  <div class="col-md-6">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="symbol">Stock Symbol</label>
-                          <input type="text" class="form-control" id="symbol" formControlName="stock_symbol" required>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="buyprice">Buy Price</label>
-                          <input type="text" class="form-control" id="buyprice" formControlName="entry_price" required>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="buydate">Buy Date</label>
-                          <input type="text" class="form-control" id="buydate" formControlName="entry_date" required>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="buyamount"># Shares Bought</label>
-                          <input type="text" class="form-control" id="buyamount" formControlName="shares_bought" required>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="stoploss">$ Stop Loss</label>
-                          <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" required>
-                        </div>
-                      </div>
-                    </div>
+    <form [formGroup]="newTradeForm" (ngSubmit)="onSubmitNewTrade()">
+      <div class="modal fade show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="margin-top: 152px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">Initiate Trade</h3>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+              <div class="input-form">
+                <div class="container mb-3 d-flex justify-content-center">
+                  <div class="col-md-8">
+                    <label for="symbol">Stock Symbol</label>
+                    <input type="text" class="form-control" id="symbol" formControlName="stock_symbol" required>
+                    <label for="buyprice">Buy Price</label>
+                    <input type="text" class="form-control" id="buyprice" formControlName="entry_price" required>
+                    <label for="buydate">Buy Date</label>
+                    <input type="text" class="form-control" id="buydate" formControlName="entry_date" required>
+                    <label for="buyamount"># Shares Bought</label>
+                    <input type="text" class="form-control" id="buyamount" formControlName="shares_bought" required>
+                    <label for="stoploss">$ Stop Loss</label>
+                    <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" required>
                   </div>
                 </div>
+              </div>
+              <div class="modal-footer">
                 <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">
-              Close
-            </button>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 
   <div *ngIf="formMode == 'addLeg'">
-    <div class="modal fade show d-block" tabindex="-1" role="dialog">
-      <div class="modal-dialog" role="document" style="margin-top: 152px;">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title">Add Trade Leg to {{selectedTransaction?.stock_symbol}}</h3>
-            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="input-form">
-              <form [formGroup]="addTradeLeg" (ngSubmit)="onSubmitAddTradeLeg()">
-                <div class="container mt-4 mb-3">
-                  <div class="col-md-6">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="symbol">Stock Symbol</label>
-                          <input type="text" class="form-control" id="symbol" formControlName="stock_symbol" required>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="buyprice">Buy Price</label>
-                          <input type="text" class="form-control" id="buyprice" formControlName="entry_price" required>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="buydate">Buy Date</label>
-                          <input type="text" class="form-control" id="buydate" formControlName="entry_date" required>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="buyamount"># Shares Bought</label>
-                          <input type="text" class="form-control" id="buyamount" formControlName="shares_bought" required>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="stoploss">$ Stop Loss</label>
-                          <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" required>
-                        </div>
-                      </div>
-                    </div>
+    <form [formGroup]="addTradeLeg" (ngSubmit)="onSubmitAddTradeLeg()">
+      <div class="modal fade show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="margin-top: 152px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">Add Trade Leg to {{selectedTransaction.stock_symbol}}</h3>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+              <div class="input-form">
+                <div class="container mb-3 d-flex justify-content-center">
+                  <div class="col-md-8">
+                    <label for="symbol">Stock Symbol</label>
+                      <input type="text" class="form-control" id="symbol" formControlName="stock_symbol" required >
+                    <label for="buyprice">Buy Price</label>
+                      <input type="text" class="form-control" id="buyprice" formControlName="entry_price" required>
+                    <label for="buydate">Buy Date</label>
+                      <input type="text" class="form-control" id="buydate" formControlName="entry_date" required>
+                    <label for="buyamount"># Shares Bought</label>
+                      <input type="text" class="form-control" id="buyamount" formControlName="shares_bought" required>
+                    <label for="stoploss">$ Stop Loss</label>
+                      <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" required>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">
-              Close
-            </button>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 
