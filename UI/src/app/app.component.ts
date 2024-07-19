@@ -13,20 +13,30 @@ import { AsyncPipe } from '@angular/common';
 export class AppComponent {
   http = inject(HttpClient);
   showForm = false;
-  showAddTradeLegForm = false;
   formMode?: 'addNew' | 'addLeg';
+  selectedTransaction?: Transaction;
 
   //a transaction observable.. denoted by the dollar sign.
   //can make use of transactions observable in html file
   transactions$ = this.getAllTransactions();
-  singleTransaction$ = this.getTransactionById();
+  selectedTransaction$ = this.getTransactionById();
+
+  constructor() {
+    this.selectedTransaction$ = this.getTransactionById();
+  }
+
+  openAddLegForm(transaction: Transaction): void {
+    this.selectedTransaction = transaction;
+    this.formMode = 'addLeg';
+    this.showForm = true;
+  }
 
   ngOnInit() {
     this.transactions$ = this.getAllTransactions();
     this.transactions$.subscribe(data => {
       console.log('Transactions:', data); // Log the data to inspect in browser console
     });
-    this.singleTransaction$.subscribe(data => {
+    this.selectedTransaction$.subscribe(data => {
       console.log('Transaction:', data);
     });
   }
