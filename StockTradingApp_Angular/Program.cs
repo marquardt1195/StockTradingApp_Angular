@@ -17,6 +17,7 @@ builder.Services.AddControllers().AddJsonOptions(options => {
 
 
 builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<ITradeService, TradeService>();
 
 
 var app = builder.Build();

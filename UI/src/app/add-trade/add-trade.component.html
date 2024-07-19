@@ -1,0 +1,44 @@
+<div *ngIf="showForm">
+  <div *ngIf="formMode == 'addNewTrade'">
+    <form [formGroup]="newTradeForm" (ngSubmit)="onSubmitNewTrade()">
+      <div class="modal fade show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="margin-top: 152px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">Initiate Trade</h3>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+              <div class="input-form">
+                <div class="container mb-3 d-flex justify-content-center">
+                  <div class="col-md-8">
+                    <label for="symbol">Stock Symbol</label>
+                    <input type="text" class="form-control" id="symbol" formControlName="stock_symbol" required>
+                    <label for="buyprice">Buy Price</label>
+                    <input type="text" class="form-control" id="buyprice" formControlName="cost_basis" required>
+                    <label for="buyamount">Shares Bought</label>
+                    <input type="text" class="form-control" id="buyamount" formControlName="shares_bought" required>
+                    <label for="buydate">Buy Date</label>
+                    <input type="text" class="form-control" id="buydate" formControlName="date_initiated" required>
+                    <label for="stoploss">$ Stop Loss</label>
+                    <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" required>
+                    <label for="sellbasis">Sell Basis</label>
+                    <input type="text" class="form-control" id="sellbasis" formControlName="sell_basis" >
+                    <label for="sharessold"># Shares Sold</label>
+                    <input type="text" class="form-control" id="sharessold" formControlName="shares_sold" >
+                    <label for="dateclosed">Date Closed</label>
+                    <input type="text" class="form-control" id="dateclosed" formControlName="date_closed" >
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

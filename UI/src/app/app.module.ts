@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { AddTradeComponent } from './add-trade/add-trade.component';
 
 @NgModule({
   declarations: [ // Components, directives, and pipes go here
@@ -19,7 +20,8 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
     NavMenuComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    AddTradeComponent
   ],
   imports: [ // Other modules whose exported classes are needed by component templates
     BrowserModule,

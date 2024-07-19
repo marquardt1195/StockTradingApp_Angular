@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from
 import { Transaction } from '../../Models/Transaction';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { TransactionService } from '../services/transaction.service';
+import { TransactionService } from '../services/TransactionService/transaction.service';
 
 @Component({
   selector: 'app-add-transaction',
@@ -11,11 +11,11 @@ import { TransactionService } from '../services/transaction.service';
   styleUrls: ['./add-transaction.component.css']
 })
 export class AddTransactionComponent implements OnChanges {
-  public newTradeForm: FormGroup;
+  public newTransactionForm: FormGroup;
   public addTradeLeg: FormGroup;
 
   @Input() showForm: boolean = false
-  @Input() formMode!: 'addNew' | 'addLeg'
+  @Input() formMode!: 'addNewTrade' | 'addNewTransaction' | 'addLeg'
   @Input() selectedTransaction!: Transaction
   @Output() closeForm = new EventEmitter<void>();
 
@@ -24,7 +24,7 @@ export class AddTransactionComponent implements OnChanges {
     private formBuilder: FormBuilder,
     private transactionService: TransactionService
   ) {
-    this.newTradeForm = this.formBuilder.group({
+    this.newTransactionForm = this.formBuilder.group({
       transaction_id: '',
       stock_symbol: '',
       entry_price: '',
@@ -56,8 +56,8 @@ export class AddTransactionComponent implements OnChanges {
   }
 
   public onSubmitNewTrade(): void {
-    if (this.newTradeForm.valid) {
-      const formValues = this.newTradeForm.value;
+    if (this.newTransactionForm.valid) {
+      const formValues = this.newTransactionForm.value;
 
       const transaction: Transaction = {
         stock_symbol: formValues.stock_symbol,
@@ -70,7 +70,7 @@ export class AddTransactionComponent implements OnChanges {
       this.transactionService.submitNewTrade(transaction).subscribe({
         next: (response: any) => {
           console.log('Transaction added successfully.', response);
-          this.newTradeForm.reset(); // Clear the form
+          this.newTransactionForm.reset(); // Clear the form
           this.closeForm.emit(); // Emit the close event
         },
         error: (error: HttpErrorResponse) => {

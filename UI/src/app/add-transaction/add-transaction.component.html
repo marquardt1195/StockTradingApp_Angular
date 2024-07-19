@@ -1,13 +1,13 @@
 
 
 <div *ngIf="showForm">
-  <div *ngIf="formMode == 'addNew'">
-    <form [formGroup]="newTradeForm" (ngSubmit)="onSubmitNewTrade()">
+  <div *ngIf="formMode == 'addNewTransaction'">
+    <form [formGroup]="newTransactionForm" (ngSubmit)="onSubmitNewTrade()">
       <div class="modal fade show d-block" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document" style="margin-top: 152px;">
           <div class="modal-content">
             <div class="modal-header">
-              <h3 class="modal-title">Initiate Trade</h3>
+              <h3 class="modal-title">Add Transaction</h3>
               <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
             </div>
             <div class="modal-body">
