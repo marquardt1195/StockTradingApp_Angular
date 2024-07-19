@@ -11,11 +11,11 @@ import { TransactionService } from '../services/transaction.service';
   styleUrls: ['./add-transaction.component.css']
 })
 export class AddTransactionComponent implements OnChanges {
-  newTradeForm: FormGroup;
-  addTradeLeg: FormGroup;
+  public newTradeForm: FormGroup;
+  public addTradeLeg: FormGroup;
 
   @Input() showForm: boolean = false
-  @Input() formMode?: 'addNew' | 'addLeg'
+  @Input() formMode!: 'addNew' | 'addLeg'
   @Input() selectedTransaction!: Transaction
   @Output() closeForm = new EventEmitter<void>();
 

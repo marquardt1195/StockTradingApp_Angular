@@ -12,14 +12,12 @@ import { TransactionService } from '../app/services/transaction.service'
 })
 
 export class AppComponent {
-  http = inject(HttpClient);
-  showForm = false;
-  formMode?: 'addNew' | 'addLeg';
-  selectedTransaction!: Transaction;
-
+  public showForm = false;
+  public formMode!: 'addNew' | 'addLeg';
+  public selectedTransaction!: Transaction;
+  public transactions$!: Observable<Transaction[]>;
   //a transaction observable.. denoted by the dollar sign.
   //can make use of transactions observable in html file
-  transactions$ = this.transactionService.getAllTransactions();
 
   constructor(private transactionService: TransactionService) {
   }
@@ -33,7 +31,7 @@ export class AppComponent {
   public ngOnInit() {
     this.transactions$ = this.transactionService.getAllTransactions();
     this.transactions$.subscribe(data => {
-      console.log('Transactions:', data); // Log the data to inspect in browser console
+      console.log('Transactions:', data);
     });
   }
 }
