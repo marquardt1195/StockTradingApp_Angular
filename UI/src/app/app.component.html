@@ -11,12 +11,11 @@
   </app-add-transaction>
 </div>-->
 
-<app-add-trade
-  *ngIf="showForm"
-  [showForm]="showForm"
-  [formMode]="formMode"
-  [selectedTransaction]="selectedTransaction"
-  (closeForm)="showForm = false">
+<app-add-trade *ngIf="showForm"
+               [showForm]="showForm"
+               [formMode]="formMode"
+               [selectedTransaction]="selectedTransaction"
+               (closeForm)="showForm = false">
 </app-add-trade>
 
 <!--<div>FOR TESTING</div>
@@ -46,8 +45,9 @@
                   <td>{{item.entry_price | currency: 'USD':'symbol':'1.2-2'}}</td>
                   <td>{{item.shares_bought}}</td>
                   <td>{{item.entry_date | date: 'MM/dd/yyyy'}}</td>
-                  <td>{{item.dollar_stop_loss | currency: 'USD':'symbol':'1.2-2'}}</td>--> <!--'symbol' uses $. 1.2-2 means at least 1 digit before the decimal point, at least 2 digits after the decimal point, and at most 2 digits after the decimal point.-->
-                  <!--<td style="width: 17%; text-align: center;">
+                  <td>{{item.dollar_stop_loss | currency: 'USD':'symbol':'1.2-2'}}</td>-->
+ <!--'symbol' uses $. 1.2-2 means at least 1 digit before the decimal point, at least 2 digits after the decimal point, and at most 2 digits after the decimal point.-->
+<!--<td style="width: 17%; text-align: center;">
                     <button class="btn btn-sm btn-secondary mx-1">
                       <i class="oi oi-magnifying-glass"></i>
                     </button>
@@ -67,7 +67,7 @@
           </table>
         </div>
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -86,7 +86,8 @@
         <button (click)="showForm = true; formMode = 'addNewTrade'" class="btn btn-success">Add New Trade</button>
       </div>
       <div class="row">
-        <div *ngIf="transactions$ | async as transactions" class="card-body">
+        <!-- Use *ngIf with else to handle loading state -->
+        <div *ngIf="transactions$ | async as transactions; else loading" class="card-body">
           <table class="table table-hover table-bordered">
             <thead>
               <tr class="table-primary">
@@ -125,11 +126,18 @@
             </tbody>
           </table>
         </div>
+        <ng-template #loading>
+          <div class="d-flex justify-content-center mt-3 mb-3">
+            <div class="spinner-border text-primary" role="status">
+              <span class="sr-only"></span>
+            </div>
+          </div>
+        </ng-template>
       </div>
-
     </div>
   </div>
 </div>
+
 
 
 <!--<div *ngIf="singleTransaction$ | async as transaction">
