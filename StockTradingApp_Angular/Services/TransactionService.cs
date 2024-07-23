@@ -17,7 +17,10 @@ namespace StockTradingApp_Angular.Services
 
         public async Task<List<Transaction>> GetAllTransactions()
         {
-            return await _context.Transaction.ToListAsync();
+            return await _context.Transaction
+                .GroupBy(x=>x.stock_symbol)
+                .Select(x=>x.OrderBy(t=>t.entry_date).First())
+                .ToListAsync();
         }
 
         public async Task<List<Transaction>> GetTransactionsByTradeId(int tradeId)
