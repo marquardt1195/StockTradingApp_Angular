@@ -20,9 +20,9 @@ namespace StockTradingApp_Angular.Services
             return await _context.Transaction.ToListAsync();
         }
 
-        public async Task<Transaction> GetTransactionById()
+        public async Task<List<Transaction>> GetTransactionsByTradeId(int tradeId)
         {
-            return await _context.Transaction.FirstOrDefaultAsync();
+            return await _context.Transaction.Where(x=>x.trade_id == tradeId).ToListAsync();
         }
 
         public async Task InitiateTrade(Transaction transaction)

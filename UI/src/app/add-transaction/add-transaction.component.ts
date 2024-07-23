@@ -35,6 +35,7 @@ export class AddTransactionComponent implements OnChanges {
     });
 
     this.addTradeLeg = this.formBuilder.group({
+      trade_id: '',
       stock_symbol: '',
       entry_price: '',
       entry_date: '',
@@ -61,6 +62,7 @@ export class AddTransactionComponent implements OnChanges {
       const formValues = this.newTransactionForm.value;
 
       const transaction: Transaction = {
+        trade_id: formValues.trade_id,
         stock_symbol: formValues.stock_symbol,
         entry_price: parseFloat(formValues.entry_price),
         entry_date: new Date(formValues.entry_date),
@@ -86,6 +88,7 @@ export class AddTransactionComponent implements OnChanges {
       const addTradeLegValues = this.addTradeLeg.value;
 
       const transaction: Transaction = {
+        trade_id: addTradeLegValues.trade_id,
         stock_symbol: addTradeLegValues.stock_symbol,
         entry_price: parseFloat(addTradeLegValues.entry_price),
         entry_date: new Date(addTradeLegValues.entry_date),

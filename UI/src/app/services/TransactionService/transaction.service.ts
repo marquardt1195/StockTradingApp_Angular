@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Transaction } from '../../../Models/Transaction';
 
@@ -21,10 +21,13 @@ export class TransactionService {
 
   //return type: transaction array
   public getAllTransactions(): Observable<Transaction[]> {
-    return this.http.get<Transaction[]>('https://localhost:7006/api/Transact/GetAllTransactions');
+    return this.http.get<Transaction[]>(`${this.apiUrl}/GetAllTransactions`);
   }
 
-  public getTransactionById(): Observable<Transaction> {
-    return this.http.get<Transaction>('https://localhost:7006/api/Transact/GetTransactionById');
+  public getTransactionsByTradeId(trade_id: number): Observable<Transaction[]> {
+    // Use HttpParams to add the trade_id as a query parameter
+    const params = new HttpParams().set('tradeId', trade_id.toString());
+
+    return this.http.get<Transaction[]>(`${this.apiUrl}/GetTransactionsByTradeId`, { params });
   }
 }

@@ -12,6 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { AddTradeComponent } from './add-trade/add-trade.component';
+import { ShowTransactionsComponent } from './show-transactions/show-transactions.component';
 
 @NgModule({
   declarations: [ // Components, directives, and pipes go here
@@ -21,7 +22,8 @@ import { AddTradeComponent } from './add-trade/add-trade.component';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    AddTradeComponent
+    AddTradeComponent,
+    ShowTransactionsComponent
   ],
   imports: [ // Other modules whose exported classes are needed by component templates
     BrowserModule,
