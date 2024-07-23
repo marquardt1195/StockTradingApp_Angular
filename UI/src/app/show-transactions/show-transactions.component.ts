@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Transaction } from '../../Models/Transaction';
 import { Observable } from 'rxjs';
 import { TransactionService } from '../services/TransactionService/transaction.service';
@@ -11,6 +11,8 @@ import { TransactionService } from '../services/TransactionService/transaction.s
 export class ShowTransactionsComponent implements OnChanges{
   @Input() transactionsByTradeId$!: Observable<Transaction[]>;
   @Input() showTransactionsModal: boolean = false
+  @Output() closeForm = new EventEmitter<void>();
+
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['showTransactionsModal'] && this.showTransactionsModal) {
@@ -19,6 +21,6 @@ export class ShowTransactionsComponent implements OnChanges{
   }
 
   public closeModal(): void {
-    this.showTransactionsModal = false;
+    this.closeForm.emit();
   }
 }

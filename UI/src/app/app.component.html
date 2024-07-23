@@ -12,7 +12,8 @@
 <app-show-transactions
   *ngIf="showTransactionsModal"
   [transactionsByTradeId$]="transactionsByTradeId$"
-  [showTransactionsModal]="showTransactionsModal">
+  [showTransactionsModal]="showTransactionsModal"
+  (closeForm)="showTransactionsModal = false">>
 </app-show-transactions>
 
 <div class="container">
