@@ -11,6 +11,7 @@
 
 <app-show-transactions
   *ngIf="showTransactionsModal"
+  [transactionsByTradeId$]="transactionsByTradeId$"
   [showTransactionsModal]="showTransactionsModal">
 </app-show-transactions>
 

@@ -16,9 +16,7 @@ export class AppComponent {
   public formMode!: 'addNewTrade' | 'addNewTransaction' | 'addLeg';
   public showTransactionsModal = false;
   public selectedTransaction!: Transaction;
- // public selectedTrade!: Trade;
   public transactions$!: Observable<Transaction[]>;
-  //public trades$!: Observable<Trade[]>;
   public transactionsByTradeId$!: Observable<Transaction[]>;
 
   //a transaction observable.. denoted by the dollar sign.
@@ -26,7 +24,6 @@ export class AppComponent {
 
   constructor(
     private transactionService: TransactionService,
-  //  private tradeService: TradeService
   ) {
   }
 
@@ -60,6 +57,7 @@ export class AppComponent {
   public openTransactionsByTradeId(trade_id: number): void {
     this.showTransactionsModal = true;
     this.transactionsByTradeId$ = this.transactionService.getTransactionsByTradeId(trade_id);
+   // this.transactionsByTradeId$.subscribe();  // Ensure the request is made
     this.transactionsByTradeId$.subscribe(data => {
       console.log('Transactions by Trade Id:', data);
     });

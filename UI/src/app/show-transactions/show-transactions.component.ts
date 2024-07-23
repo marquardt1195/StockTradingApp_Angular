@@ -8,15 +8,15 @@ import { TransactionService } from '../services/TransactionService/transaction.s
   templateUrl: './show-transactions.component.html',
   styleUrl: './show-transactions.component.css'
 })
-export class ShowTransactionsComponent{
+export class ShowTransactionsComponent implements OnChanges{
   @Input() transactionsByTradeId$!: Observable<Transaction[]>;
   @Input() showTransactionsModal: boolean = false
 
-  //ngOnChanges(changes: SimpleChanges): void {
-  //  if (changes['showTransactionsModal'] && this.showTransactionsModal) {
-  //    // Fetch the transactions if necessary
-  //  }
-  //}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['showTransactionsModal'] && this.showTransactionsModal) {
+      // Fetch the transactions if necessary
+    }
+  }
 
   public closeModal(): void {
     this.showTransactionsModal = false;

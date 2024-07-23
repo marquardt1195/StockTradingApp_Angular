@@ -25,9 +25,7 @@ export class TransactionService {
   }
 
   public getTransactionsByTradeId(trade_id: number): Observable<Transaction[]> {
-    // Use HttpParams to add the trade_id as a query parameter
     const params = new HttpParams().set('tradeId', trade_id.toString());
-
     return this.http.get<Transaction[]>(`${this.apiUrl}/GetTransactionsByTradeId`, { params });
   }
 }

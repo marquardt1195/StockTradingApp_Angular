@@ -2,3 +2,13 @@
 body {
   background-color: #f0f0f0;
 }
+
+.custom-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
+  z-index: 1040; /* Ensure it is behind the modal but above other content */
+}
