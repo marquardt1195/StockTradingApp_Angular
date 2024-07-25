@@ -13,7 +13,7 @@ import { TransactionService } from '../app/services/TransactionService/transacti
 
 export class AppComponent {
   public showForm = false;
-  public formMode!: 'addNewTrade' | 'addNewTransaction' | 'addLeg';
+  public formMode!: 'addNewTrade' | 'deleteTrade' | 'addLeg' | 'reduceLeg';
   public showTransactionsModal = false;
   public selectedTransaction!: Transaction;
   public transactions$!: Observable<Transaction[]>;
@@ -46,6 +46,18 @@ export class AppComponent {
   public openAddLegForm(transaction: Transaction): void {
     this.selectedTransaction = transaction;
     this.formMode = 'addLeg';
+    this.showForm = true;
+  }
+
+  public openReduceLegForm(transaction: Transaction): void {
+    this.selectedTransaction = transaction;
+    this.formMode = 'reduceLeg';
+    this.showForm = true;
+  }
+
+  public openDeleteTrade(transaction: Transaction): void {
+    this.selectedTransaction = transaction;
+    this.formMode = 'deleteTrade';
     this.showForm = true;
   }
 

@@ -12,3 +12,18 @@ body {
   background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
   z-index: 1040; /* Ensure it is behind the modal but above other content */
 }
+
+.ng-invalid.ng-touched, ng.ng-invalid.ng-dirty {
+    border-color: red;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+}
+
+input[disabled] {
+  background-color: #e9ecef; /* Light gray background for disabled inputs */
+  color: #6c757d; /* Gray text color for disabled inputs */
+  cursor: not-allowed; /* Cursor to indicate that the field is not editable */
+}

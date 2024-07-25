@@ -39,7 +39,10 @@ export class AddTransactionComponent implements OnChanges {
       stock_symbol: '',
       entry_price: '',
       entry_date: '',
-      shares_bought: ''
+      shares_bought: '',
+      exit_price: '',
+      shares_sold: '',
+      exit_date: ''
     })
   }
 
@@ -67,7 +70,10 @@ export class AddTransactionComponent implements OnChanges {
         entry_price: parseFloat(formValues.entry_price),
         entry_date: new Date(formValues.entry_date),
         shares_bought: parseInt(formValues.shares_bought, 10),
-        dollar_stop_loss: parseFloat(formValues.dollar_stop_loss)
+        dollar_stop_loss: parseFloat(formValues.dollar_stop_loss),
+        exit_price: parseFloat(formValues.exit_price),
+        shares_sold: parseInt(formValues.shares_sold, 10),
+        exit_date: new Date(formValues.exit_date)
       };
 
       this.transactionService.submitNewTrade(transaction).subscribe({
@@ -93,10 +99,14 @@ export class AddTransactionComponent implements OnChanges {
         entry_price: parseFloat(addTradeLegValues.entry_price),
         entry_date: new Date(addTradeLegValues.entry_date),
         shares_bought: parseInt(addTradeLegValues.shares_bought, 10),
-        dollar_stop_loss: parseFloat(addTradeLegValues.dollar_stop_loss)
+        dollar_stop_loss: parseFloat(addTradeLegValues.dollar_stop_loss),
+        exit_price: parseFloat(addTradeLegValues.exit_price),
+        shares_sold: parseInt(addTradeLegValues.shares_sold, 10),
+        exit_date: new Date(addTradeLegValues.exit_date)
+       
       }
 
-      this.transactionService.submitTradeLeg(transaction).subscribe({
+      this.transactionService.submitAddTradeLeg(transaction).subscribe({
         next: (response: any) => {
           console.log('Trade leg added successfully.', response);
           this.addTradeLeg.reset(); // Clear the form

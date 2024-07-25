@@ -15,8 +15,12 @@ export class TransactionService {
     return this.http.post<any>(`${this.apiUrl}/AddTransaction`, transaction);
   }
 
-  public submitTradeLeg(transaction: Transaction): Observable<any> {
+  public submitAddTradeLeg(transaction: Transaction): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/AddTradeLeg`, transaction);
+  }
+
+  public submitReduceTradeLeg(transaction: Transaction): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/ReduceTradeLeg`, transaction);
   }
 
   //return type: transaction array

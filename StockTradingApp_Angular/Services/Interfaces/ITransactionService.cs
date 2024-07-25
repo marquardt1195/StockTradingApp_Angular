@@ -11,5 +11,8 @@ namespace StockTradingApp_Angular.Services.Interfaces
         Task InitiateTrade(Transaction transaction);
 
         Task AddTradeLeg(Transaction transaction);
+
+        Task ReduceTradeLeg(Transaction transaction);
+
     }
 }

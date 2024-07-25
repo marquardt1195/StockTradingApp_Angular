@@ -11,18 +11,18 @@ namespace StockTradingApp_Angular.Data
 
         public string stock_symbol { get; set; } = string.Empty;
 
-        public decimal entry_price { get; set; }
+        public decimal? entry_price { get; set; }
 
-        public int shares_bought { get; set; }
+        public int? shares_bought { get; set; }
 
-        public DateTime entry_date { get; set; }
+        public DateTime? entry_date { get; set; }
 
-        public decimal dollar_stop_loss { get; set; }
+        public decimal? dollar_stop_loss { get; set; }
 
-        //public decimal? exit_price { get; set; }
+        public decimal? exit_price { get; set; }
 
-        //public int? shares_sold { get; set; }
+        public int? shares_sold { get; set; }
 
-        //public DateTime? exit_date { get; set; }
+        public DateTime? exit_date { get; set; }
     }
 }

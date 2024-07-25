@@ -29,8 +29,8 @@
             <thead>
               <tr class="table-primary">
                 <th>Symbol</th>
-                <th>$ Entry Price</th>
-                <th># Shares Bought</th>
+                <th>Cost Basis</th>
+                <th># Shares</th>
                 <th>Entry Date</th>
                 <th>$ Stop Loss</th>
                 <th>Actions</th>
@@ -51,10 +51,10 @@
                     <button class="btn btn-sm btn-success" (click)="openAddLegForm(item)">
                       <i class="oi oi-plus"></i>
                     </button>
-                    <button class="btn btn-sm btn-danger mx-1">
+                    <button class="btn btn-sm btn-danger mx-1" (click)="openReduceLegForm(item)">
                       <i class="oi oi-minus"></i>
                     </button>
-                    <button class="btn btn-sm btn-outline-danger">
+                    <button class="btn btn-sm btn-outline-danger" (click)="openDeleteTrade(item)">
                       <i class="oi oi-trash"></i>
                     </button>
                   </td>

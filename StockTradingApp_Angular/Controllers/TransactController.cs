@@ -40,5 +40,11 @@ namespace StockTradingApp_Angular.Controllers
         {
             await _transactionService.AddTradeLeg(transaction);
         }
+
+        [HttpPost("ReduceTradeLeg")]
+        public async Task ReduceTradeLeg(Data.Transaction transaction)
+        {
+            await _transactionService.ReduceTradeLeg(transaction);
+        }
     }
 }
