@@ -74,7 +74,15 @@ export class AddTradeComponent {
 
 
   public onSubmitDeleteTrade(): void {
-
+    const trade_id: number = this.selectedTransaction.trade_id;
+    this.tradeService.deleteTrade(trade_id).subscribe({
+      next: (response: any) => {
+        console.log('Trade deleted successfully.', response);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error deleting trade', error);
+      }
+    });
   }
 
 

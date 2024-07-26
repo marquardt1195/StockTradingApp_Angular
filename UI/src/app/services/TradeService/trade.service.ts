@@ -22,4 +22,8 @@ export class TradeService {
     return this.http.post<any>(`${this.apiUrl}/AddTrade`, trade);
   }
 
+  public deleteTrade(trade_id: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/DeleteTrade?trade_id=${trade_id}`, null);
+  }
+
 }

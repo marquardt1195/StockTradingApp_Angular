@@ -8,5 +8,7 @@ namespace StockTradingApp_Angular.Services.Interfaces
 
         Task InitiateTrade(Trade trade);
 
+        Task DeleteTrade(int trade_id);
+
     }
 }

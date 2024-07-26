@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StockTradingApp_Angular.Data;
 using StockTradingApp_Angular.Services.Interfaces;
+using System.Runtime.InteropServices;
 
 namespace StockTradingApp_Angular.Services
 {
@@ -43,11 +44,27 @@ namespace StockTradingApp_Angular.Services
                     await _context.Transaction.AddAsync(transaction);
                     await _context.SaveChangesAsync();
                 }
-            } 
+            }
             catch (Exception ex)
             {
                 var exceptionMessage = ex.Message;
             }
+        }
+
+        public async Task DeleteTrade(int trade_id)
+        {
+            var thisTrade = await _context.Trade.FirstAsync(x => x.trade_id == trade_id);
+            var theseTransactions = await _context.Transaction.Where(x => x.trade_id == trade_id).ToListAsync();
+
+            if (theseTransactions.Any())
+            {
+                _context.RemoveRange(theseTransactions);
+            }
+            if (thisTrade != null)
+            {
+                _context.Remove(thisTrade);
+            }
+            await _context.SaveChangesAsync();
         }
     }
 }

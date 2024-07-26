@@ -27,5 +27,11 @@ namespace StockTradingApp_Angular.Controllers
         {
             await _tradeService.InitiateTrade(trade);
         }
+
+        [HttpPost("DeleteTrade")]
+        public async Task DeleteTrade(int trade_id)
+        {
+            await _tradeService.DeleteTrade(trade_id);
+        }
     }
 }
