@@ -100,7 +100,7 @@ export class AddTransactionComponent implements OnChanges {
         }
       });
     }
-    if (this.addTradeLeg.invalid) {
+    else {
       // Mark all controls as touched to trigger validation messages
       this.addTradeLeg.markAllAsTouched();
       return;
@@ -137,7 +137,7 @@ export class AddTransactionComponent implements OnChanges {
         }
       });
     }
-    if (this.reduceTradeLeg.invalid) {
+    else {
       // Mark all controls as touched to trigger validation messages
       this.reduceTradeLeg.markAllAsTouched();
       return;

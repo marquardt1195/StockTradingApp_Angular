@@ -67,8 +67,7 @@ export class AddTradeComponent {
         }
       });
     }
-
-    if (this.newTradeForm.invalid) {
+    else {
       // Mark all controls as touched to trigger validation messages
       this.newTradeForm.markAllAsTouched();
       return;
