@@ -1,5 +1,5 @@
 <div *ngIf="showForm">
-  <div *ngIf="formMode == 'addNewTrade'">
+  <div *ngIf="tradeFormMode == 'addNewTrade'">
     <form [formGroup]="newTradeForm" (ngSubmit)="onSubmitNewTrade()">
       <div class="modal fade show d-block" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document" style="margin-top: 152px;">
@@ -65,132 +65,8 @@
     </form>
   </div>
 
-  <div *ngIf="formMode == 'addLeg'">
-    <form [formGroup]="addTradeLeg" (ngSubmit)="onSubmitAddTradeLeg()">
-      <div class="modal fade show d-block" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document" style="margin-top: 152px;">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3 class="modal-title">Add Trade Leg to {{selectedTransaction.stock_symbol}}</h3>
-              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
-            </div>
-            <div class="modal-body">
-              <div class="input-form">
-                <div class="container mb-3 d-flex justify-content-center">
-                  <div class="col-md-8">
-                    <div>
-                      <label for="symbol">Stock Symbol</label>
-                      <input type="text" class="form-control" id="symbol" formControlName="stock_symbol" [attr.disabled]="isDisabled ? true : null" required>
-                      <div *ngIf="addTradeLeg.get('stock_symbol')?.invalid && (addTradeLeg.get('stock_symbol')?.touched || addTradeLeg.get('stock_symbol')?.dirty)" class="error-message">
-                        Stock Symbol is required.
-                      </div>
-                    </div>
-
-                    <div>
-                      <label for="buyprice">Buy Price</label>
-                      <input type="text" class="form-control" id="buyprice" formControlName="entry_price" required>
-                      <div *ngIf="addTradeLeg.get('entry_price')?.invalid && (addTradeLeg.get('entry_price')?.touched || addTradeLeg.get('entry_price')?.dirty)" class="error-message">
-                        Buy Price is required.
-                      </div>
-                    </div>
-
-                    <div>
-                      <label for="buydate">Buy Date</label>
-                      <input type="text" class="form-control" id="buydate" formControlName="entry_date" required>
-                      <div *ngIf="addTradeLeg.get('entry_date')?.invalid && (addTradeLeg.get('entry_date')?.touched || addTradeLeg.get('entry_date')?.dirty)" class="error-message">
-                        Buy Date is required.
-                      </div>
-                    </div>
-
-                    <div>
-                      <label for="buyamount"># Shares Bought</label>
-                      <input type="text" class="form-control" id="buyamount" formControlName="shares_bought" required>
-                      <div *ngIf="addTradeLeg.get('shares_bought')?.invalid && (addTradeLeg.get('shares_bought')?.touched || addTradeLeg.get('shares_bought')?.dirty)" class="error-message">
-                        Number of Shares Bought is required.
-                      </div>
-                    </div>
-
-                    <div>
-                      <label for="stoploss">$ Stop Loss</label>
-                      <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" required>
-                      <div *ngIf="addTradeLeg.get('dollar_stop_loss')?.invalid && (addTradeLeg.get('dollar_stop_loss')?.touched || addTradeLeg.get('dollar_stop_loss')?.dirty)" class="error-message">
-                        Dollar Stop Loss is required.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <div *ngIf="formMode == 'reduceLeg'">
-    <form [formGroup]="reduceTradeLeg" (ngSubmit)="onSubmitReduceTradeLeg()">
-      <div class="modal fade show d-block" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document" style="margin-top: 152px;">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3 class="modal-title">Reduce {{selectedTransaction.stock_symbol}}</h3>
-              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
-            </div>
-            <div class="modal-body">
-              <div class="input-form">
-                <div class="container mb-3 d-flex justify-content-center">
-                  <div class="col-md-8">
-                    <div>
-                      <label for="stock_symbol">Stock Symbol</label>
-                      <input type="text" class="form-control" id="stock_symbol" formControlName="stock_symbol" [attr.disabled]="isDisabled ? true : null" required>
-                      <div *ngIf="reduceTradeLeg.get('stock_symbol')?.invalid && (reduceTradeLeg.get('stock_symbol')?.touched || reduceTradeLeg.get('stock_symbol')?.dirty)" class="error-message">
-                        Stock Symbol is required.
-                      </div>
-                    </div>
-
-                    <div>
-                      <label for="shares_sold"># Shares Sold</label>
-                      <input type="text" class="form-control" id="shares_sold" formControlName="shares_sold" required>
-                      <div *ngIf="reduceTradeLeg.get('shares_sold')?.invalid && (reduceTradeLeg.get('shares_sold')?.touched || reduceTradeLeg.get('shares_sold')?.dirty)" class="error-message">
-                        Number of Shares Sold is required.
-                      </div>
-                    </div>
-
-                    <div>
-                      <label for="exit_price">Sell Price</label>
-                      <input type="text" class="form-control" id="exit_price" formControlName="exit_price" required>
-                      <div *ngIf="reduceTradeLeg.get('exit_price')?.invalid && (reduceTradeLeg.get('exit_price')?.touched || reduceTradeLeg.get('exit_price')?.dirty)" class="error-message">
-                        Sell Price is required.
-                      </div>
-                    </div>
-
-                    <div>
-                      <label for="exit_date">Sell Date</label>
-                      <input type="text" class="form-control" id="exit_date" formControlName="exit_date" required>
-                      <div *ngIf="reduceTradeLeg.get('exit_date')?.invalid && (reduceTradeLeg.get('exit_date')?.touched || reduceTradeLeg.get('exit_date')?.dirty)" class="error-message">
-                        Sell Date is required.
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <div *ngIf="formMode == 'deleteTrade'">
-    <form [formGroup]="reduceTradeLeg" (ngSubmit)="onSubmitDeleteTrade()">
+  <div *ngIf="tradeFormMode == 'deleteTrade'">
+    <form (ngSubmit)="onSubmitDeleteTrade()">
       <div class="modal fade show d-block" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document" style="margin-top: 152px;">
           <div class="modal-content">

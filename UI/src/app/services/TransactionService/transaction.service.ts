@@ -11,10 +11,6 @@ export class TransactionService {
 
   constructor(private http: HttpClient) { }
 
-  public submitNewTrade(transaction: Transaction): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/AddTransaction`, transaction);
-  }
-
   public submitAddTradeLeg(transaction: Transaction): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/AddTradeLeg`, transaction);
   }

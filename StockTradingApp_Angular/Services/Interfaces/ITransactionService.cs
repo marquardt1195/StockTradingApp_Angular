@@ -8,8 +8,6 @@ namespace StockTradingApp_Angular.Services.Interfaces
 
         Task<List<Transaction>> GetTransactionsByTradeId(int tradeId);
 
-        Task InitiateTrade(Transaction transaction);
-
         Task AddTradeLeg(Transaction transaction);
 
         Task ReduceTradeLeg(Transaction transaction);

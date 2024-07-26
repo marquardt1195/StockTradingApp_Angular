@@ -13,7 +13,8 @@ import { TransactionService } from '../app/services/TransactionService/transacti
 
 export class AppComponent {
   public showForm = false;
-  public formMode!: 'addNewTrade' | 'deleteTrade' | 'addLeg' | 'reduceLeg';
+  public tradeFormMode!: 'addNewTrade' | 'deleteTrade'
+  public transactionFormMode!: 'addLeg' | 'reduceLeg';
   public showTransactionsModal = false;
   public selectedTransaction!: Transaction;
   public transactions$!: Observable<Transaction[]>;
@@ -28,14 +29,6 @@ export class AppComponent {
   }
 
   public ngOnInit() {
-    //this.trades$ = this.tradeService.getAllTrades();
-    //this.trades$.subscribe(data => {
-    //  console.log('Trades:', data);
-    //});
-    //this.transactions$ = this.transactionService.getAllTransactions();
-    //this.transactions$.subscribe(data => {
-    //  console.log('Transactions:', data);
-    //});
     this.loadTransactions();
   }
 
@@ -45,19 +38,19 @@ export class AppComponent {
 
   public openAddLegForm(transaction: Transaction): void {
     this.selectedTransaction = transaction;
-    this.formMode = 'addLeg';
+    this.transactionFormMode = 'addLeg';
     this.showForm = true;
   }
 
   public openReduceLegForm(transaction: Transaction): void {
     this.selectedTransaction = transaction;
-    this.formMode = 'reduceLeg';
+    this.transactionFormMode = 'reduceLeg';
     this.showForm = true;
   }
 
   public openDeleteTrade(transaction: Transaction): void {
     this.selectedTransaction = transaction;
-    this.formMode = 'deleteTrade';
+    this.tradeFormMode = 'deleteTrade';
     this.showForm = true;
   }
 

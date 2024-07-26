@@ -36,23 +36,6 @@ namespace StockTradingApp_Angular.Services
             return await _context.Transaction.Where(x=>x.trade_id == tradeId).ToListAsync();
         }
 
-        public async Task InitiateTrade(Transaction transaction)
-        {
-            try
-            {
-                if (transaction != null)
-                {
-                    await _context.Transaction.AddAsync(transaction);
-                    await _context.SaveChangesAsync();
-                }
-            }
-            catch (Exception ex)
-            {
-                var message = ex.Message;
-            }
-
-        }
-
         public async Task AddTradeLeg(Transaction transaction)
         {
             try
