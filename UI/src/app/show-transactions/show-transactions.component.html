@@ -1,7 +1,7 @@
 <div *ngIf="showTransactionsModal">
   <div class="custom-backdrop">
-    <div class="modal fade show d-block" tabindex="-1">
-      <div role="document" class="modal-dialog modal-lg" style="margin-top: 152px;">
+    <div class="modal fade show d-flex justify-content-center" tabindex="-1">
+      <div style="margin-top: 20%; width: 50%;">
         <div class="modal-content modal-color">
           <div>
             <button type="button" class="btn-close m-2" style="float: right;" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
@@ -20,6 +20,7 @@
                       <th>Exit Price</th>
                       <th>Shares Sold</th>
                       <th>Exit Date</th>
+                      <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -35,6 +36,14 @@
                           <td>{{item.exit_price | currency: 'USD':'symbol':'1.2-2'}}</td>
                           <td>{{item.shares_sold}}</td>
                           <td>{{item.exit_date | date: 'MM/dd/yyyy'}}</td>
+                          <td style="display: flex;">
+                            <button class="btn btn-xs btn-secondary mx-1">
+                              <i class="oi oi-pencil"></i>
+                            </button>
+                            <button class="btn btn-xs btn-outline-danger">
+                              <i class="oi oi-trash"></i>
+                            </button>
+                          </td>
                         </tr>
                       </ng-container>
                     </ng-container>
@@ -42,7 +51,6 @@
                 </table>
               </div>
             </div>
-
           </div>
         </div>
       </div>
