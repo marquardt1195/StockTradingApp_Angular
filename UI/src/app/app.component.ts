@@ -68,4 +68,7 @@ export class AppComponent {
     });
   }
 
+  public onRefreshTransactions(): void {
+    this.loadTransactions();
+  }
 }

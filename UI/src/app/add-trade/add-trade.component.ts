@@ -21,6 +21,7 @@ export class AddTradeComponent {
   @Input() tradeFormMode!: 'addNewTrade' | 'deleteTrade'
   @Input() selectedTransaction!: Transaction
   @Output() closeForm = new EventEmitter<void>();
+  @Output() refreshTransactions = new EventEmitter<void>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -58,6 +59,7 @@ export class AddTradeComponent {
         next: (response: any) => {
           console.log('Trade added successfully.', response);
           this.newTradeForm.reset(); // Clear the form
+          this.refreshTransactions.emit(); // Emit the refresh event
           this.closeForm.emit(); // Emit the close event
         },
         error: (error: HttpErrorResponse) => {
@@ -65,6 +67,7 @@ export class AddTradeComponent {
         }
       });
     }
+
     if (this.newTradeForm.invalid) {
       // Mark all controls as touched to trigger validation messages
       this.newTradeForm.markAllAsTouched();
@@ -78,6 +81,8 @@ export class AddTradeComponent {
     this.tradeService.deleteTrade(trade_id).subscribe({
       next: (response: any) => {
         console.log('Trade deleted successfully.', response);
+        this.refreshTransactions.emit(); // Emit the refresh event
+        this.closeForm.emit(); // Emit the close event
       },
       error: (error: HttpErrorResponse) => {
         console.error('Error deleting trade', error);

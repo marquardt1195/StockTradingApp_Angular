@@ -59,12 +59,13 @@ namespace StockTradingApp_Angular.Services
             if (theseTransactions.Any())
             {
                 _context.RemoveRange(theseTransactions);
+                await _context.SaveChangesAsync();
             }
             if (thisTrade != null)
             {
                 _context.Remove(thisTrade);
+                await _context.SaveChangesAsync();
             }
-            await _context.SaveChangesAsync();
         }
     }
 }

@@ -6,7 +6,8 @@
   [showForm]="showForm"
   [tradeFormMode]="tradeFormMode"
   [selectedTransaction]="selectedTransaction"
-  (closeForm)="showForm = false">
+  (closeForm)="showForm = false"
+  (refreshTransactions)="onRefreshTransactions()">
 </app-add-trade>
 
 <app-add-transaction
