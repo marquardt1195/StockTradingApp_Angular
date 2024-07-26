@@ -1,5 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-/*f0f0f0*/
+
 body {
   background-color: #242935;
 }
@@ -17,11 +16,13 @@ body {
 }
 
 .custom-backdrop {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent black */
-  z-index: 1040; /* Ensure it is behind the modal but above other content */
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed; /* Ensures it covers the entire screen */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1040; /* Ensure it is above other content but below the modal */
 }
 
 .ng-invalid.ng-touched, ng.ng-invalid.ng-dirty {
@@ -35,7 +36,7 @@ body {
 
 input[disabled] {
   background-color: #e9ecef; /* Light gray background for disabled inputs */
-  color: #6c757d; /* Gray text color for disabled inputs */
+  color: #515356;
   cursor: not-allowed; /* Cursor to indicate that the field is not editable */
 }
 
