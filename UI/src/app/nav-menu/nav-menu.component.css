@@ -1,24 +1,31 @@
 nav {
-  background-color: #333;
-  padding: 1em;
+  background-color: #3A4A65;
 }
 
 ul {
-  list-style-type: none;
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space out items */
+  list-style: none; /* Remove bullet points */
   margin: 0;
   padding: 0;
-  display: flex;
 }
 
 li {
-  margin-right: 1em;
+  margin: 0;
 }
 
-a {
-  color: white;
-  text-decoration: none;
-}
-
-  a:hover {
-    text-decoration: underline;
+  li a {
+    text-decoration: none;
+    color: white;
+    padding: 14px 15px; /* Padding for links */
+    display: block; /* Block display for padding to work */
   }
+
+    li a:hover {
+      background-color: #242935;
+      border-radius: 4px;
+    }
+
+.account-nav {
+  margin-left: auto; /* Pushes the account link to the right */
+}

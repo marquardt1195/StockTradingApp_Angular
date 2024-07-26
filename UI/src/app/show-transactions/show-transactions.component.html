@@ -2,14 +2,14 @@
   <div class="custom-backdrop">
     <div class="modal fade show d-block" tabindex="-1">
       <div role="document" class="modal-dialog modal-lg" style="margin-top: 152px;">
-        <div class="modal-content">
+        <div class="modal-content modal-color">
           <div>
             <button type="button" class="btn-close m-2" style="float: right;" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
           </div>
           <div class="modal-body">
             <div class="container mb-3 d-flex justify-content-center">
               <div class="col-md-8">
-                <table class="table table-bordered table-hover">
+                <table class="table table-hover table-bordered">
                   <thead>
                     <tr class="table-primary">
                       <th>Symbol</th>
@@ -17,6 +17,9 @@
                       <th>Shares Bought</th>
                       <th>Entry Date</th>
                       <th>Stop Loss</th>
+                      <th>Exit Price</th>
+                      <th>Shares Sold</th>
+                      <th>Exit Date</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -29,6 +32,9 @@
                           <td>{{item.shares_bought}}</td>
                           <td>{{item.entry_date | date: 'MM/dd/yyyy'}}</td>
                           <td>{{item.dollar_stop_loss | currency: 'USD':'symbol':'1.2-2'}}</td>
+                          <td>{{item.exit_price | currency: 'USD':'symbol':'1.2-2'}}</td>
+                          <td>{{item.shares_sold}}</td>
+                          <td>{{item.exit_date | date: 'MM/dd/yyyy'}}</td>
                         </tr>
                       </ng-container>
                     </ng-container>

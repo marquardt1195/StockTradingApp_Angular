@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
-import { ContactComponent } from './contact/contact.component';
+import { OpenPositionsComponent } from './nav-menu/open-positions/open-positions.component'
+import { TradesComponent } from './nav-menu/trades/trades.component'
+import { AccountComponent } from './nav-menu/account/account.component';
+import { AnalyticsComponent } from './nav-menu/analytics/analytics.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'contact', component: ContactComponent },
+  { path: 'account', component: AccountComponent },
+  { path: 'positions', component: OpenPositionsComponent },
+  { path: 'analytics', component: AnalyticsComponent},
+  { path: 'trades', component: TradesComponent },
 ];
 
 @NgModule({

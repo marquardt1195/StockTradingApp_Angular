@@ -1,6 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+/*f0f0f0*/
 body {
-  background-color: #f0f0f0;
+  background-color: #242935;
+}
+
+.card-color {
+  background-color: #D8DCDF;
+}
+
+.modal-color {
+    background-color: #f0f0f0;
+}
+
+.nav-color {
+    background-color: white;
 }
 
 .custom-backdrop {
@@ -26,4 +39,16 @@ input[disabled] {
   background-color: #e9ecef; /* Light gray background for disabled inputs */
   color: #6c757d; /* Gray text color for disabled inputs */
   cursor: not-allowed; /* Cursor to indicate that the field is not editable */
+}
+
+.btn-xs {
+  padding: 2px 5px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.table-rounded {
+  border-radius: 10px; /* Adjust as needed */
+  overflow: hidden; /* Ensure rounded corners are visible */
+  border: 1px solid #ddd; /* Optional: Add a border to the table */
 }
