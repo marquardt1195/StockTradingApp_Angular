@@ -18,8 +18,8 @@ export class AddTradeComponent {
 
 
   @Input() showForm: boolean = false
-  @Input() tradeFormMode!: 'addNewTrade' | 'deleteTrade'
-  @Input() selectedTransaction!: Transaction
+  @Input() tradeFormMode: 'addNewTrade' | 'deleteTrade' | null = null;
+  @Input() selectedTransaction!: Transaction;
   @Output() closeForm = new EventEmitter<void>();
   @Output() refreshTransactions = new EventEmitter<void>();
 

@@ -16,8 +16,8 @@ export class AddTransactionComponent implements OnChanges {
   isDisabled = true;
 
   @Input() showForm: boolean = false
-  @Input() transactionFormMode!: 'addLeg' | 'reduceLeg'
-  @Input() selectedTransaction!: Transaction
+  @Input() transactionFormMode: 'addLeg' | 'reduceLeg' | null = null;
+  @Input() selectedTransaction!: Transaction;
   @Output() closeForm = new EventEmitter<void>();
 
   constructor(

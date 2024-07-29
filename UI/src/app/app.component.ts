@@ -13,8 +13,8 @@ import { TransactionService } from '../app/services/TransactionService/transacti
 
 export class AppComponent {
   public showForm = false;
-  public tradeFormMode!: 'addNewTrade' | 'deleteTrade'
-  public transactionFormMode!: 'addLeg' | 'reduceLeg';
+  public tradeFormMode: 'addNewTrade' | 'deleteTrade' | null = null;
+  public transactionFormMode: 'addLeg' | 'reduceLeg' | null = null;
   public showTransactionsModal = false;
   public selectedTransaction!: Transaction;
   public transactions$!: Observable<Transaction[]>;
@@ -23,9 +23,9 @@ export class AppComponent {
   //a transaction observable.. denoted by the dollar sign.
   //can make use of transactions observable in html file
 
-  constructor(
-    private transactionService: TransactionService,
-  ) {
+  constructor(private transactionService: TransactionService) {
+    this.tradeFormMode = null;
+    this.transactionFormMode = null;
   }
 
   public ngOnInit() {
@@ -50,6 +50,7 @@ export class AppComponent {
 
   public openDeleteTrade(transaction: Transaction): void {
     this.selectedTransaction = transaction;
+    this.transactionFormMode = null; //needed to prevent add and reduce legs from showing when deleting..
     this.tradeFormMode = 'deleteTrade';
     this.showForm = true;
   }

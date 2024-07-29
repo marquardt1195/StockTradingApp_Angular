@@ -47,7 +47,7 @@ input[disabled] {
 }
 
 .table-wrapper {
-  border: 1px solid #696B6F; /* Outer border */
+  border: 1px solid #96999D; /* Outer border */
   border-radius: 8px; /* Rounded corners */
   overflow: hidden; /* Ensure rounded corners are visible */
   padding: 0; /* No padding */
