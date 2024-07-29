@@ -46,8 +46,17 @@ input[disabled] {
   line-height: 1.5;
 }
 
-.table-rounded {
-  border-radius: 10px; /* Adjust as needed */
+.table-wrapper {
+  border: 1px solid #696B6F; /* Outer border */
+  border-radius: 8px; /* Rounded corners */
   overflow: hidden; /* Ensure rounded corners are visible */
-  border: 1px solid #ddd; /* Optional: Add a border to the table */
+  padding: 0; /* No padding */
+  margin: 0; /* No margin */
+}
+
+.table-rounded {
+  border-collapse: separate; /* Ensure the border doesn't merge with cell borders */
+  border-spacing: 0; /* No spacing between cells */
+  width: 100%;
+  margin: 0; /* No margin */
 }

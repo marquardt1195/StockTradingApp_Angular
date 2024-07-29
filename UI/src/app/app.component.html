@@ -34,43 +34,45 @@
       <div class="row">
         <!-- Use *ngIf with else to handle loading state -->
         <div *ngIf="transactions$ | async as transactions; else loading" class="card-body">
-          <table class="table table-hover table-rounded">
-            <thead style="text-align: center;">
-              <tr class="table-primary">
-                <th>Symbol</th>
-                <th>Cost Basis</th>
-                <th># Shares</th>
-                <th>Entry Date</th>
-                <th>$ Stop Loss</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody style="text-align: center;">
-              <ng-container *ngFor="let item of transactions">
-                <tr>
-                  <td style="font-weight: bold;">{{item.stock_symbol}}</td>
-                  <td>{{item.entry_price | currency: 'USD':'symbol':'1.2-2'}}</td>
-                  <td>{{item.shares_bought}}</td>
-                  <td>{{item.entry_date | date: 'MM/dd/yyyy'}}</td>
-                  <td>{{item.dollar_stop_loss | currency: 'USD':'symbol':'1.2-2'}}</td> <!--'symbol' uses $. 1.2-2 means at least 1 digit before the decimal point, at least 2 digits after the decimal point, and at most 2 digits after the decimal point.-->
-                  <td style="width: 17%; text-align: center;">
-                    <button class="btn btn-xs btn-secondary mx-1">
-                      <i class="oi oi-magnifying-glass" (click)="openTransactionsByTradeId(item.trade_id)"></i>
-                    </button>
-                    <button class="btn btn-xs btn-success" (click)="openAddLegForm(item)">
-                      <i class="oi oi-plus"></i>
-                    </button>
-                    <button class="btn btn-xs btn-danger mx-1" (click)="openReduceLegForm(item)">
-                      <i class="oi oi-minus"></i>
-                    </button>
-                    <button class="btn btn-xs btn-outline-danger" (click)="openDeleteTrade(item)">
-                      <i class="oi oi-trash"></i>
-                    </button>
-                  </td>
+          <div class="table-wrapper">
+            <table class="table table-hover table-rounded">
+              <thead style="text-align: center;">
+                <tr class="table-primary">
+                  <th>Symbol</th>
+                  <th>Cost Basis</th>
+                  <th># Shares</th>
+                  <th>Entry Date</th>
+                  <th>$ Stop Loss</th>
+                  <th>Actions</th>
                 </tr>
-              </ng-container>
-            </tbody>
-          </table>
+              </thead>
+              <tbody style="text-align: center;">
+                <ng-container *ngFor="let item of transactions">
+                  <tr>
+                    <td style="font-weight: bold;">{{item.stock_symbol}}</td>
+                    <td>{{item.entry_price | currency: 'USD':'symbol':'1.2-2'}}</td>
+                    <td>{{item.shares_bought}}</td>
+                    <td>{{item.entry_date | date: 'MM/dd/yyyy'}}</td>
+                    <td>{{item.dollar_stop_loss | currency: 'USD':'symbol':'1.2-2'}}</td> <!--'symbol' uses $. 1.2-2 means at least 1 digit before the decimal point, at least 2 digits after the decimal point, and at most 2 digits after the decimal point.-->
+                    <td style="width: 17%; text-align: center;">
+                      <button class="btn btn-xs btn-secondary mx-1">
+                        <i class="oi oi-magnifying-glass" (click)="openTransactionsByTradeId(item.trade_id)"></i>
+                      </button>
+                      <button class="btn btn-xs btn-success" (click)="openAddLegForm(item)">
+                        <i class="oi oi-plus"></i>
+                      </button>
+                      <button class="btn btn-xs btn-danger mx-1" (click)="openReduceLegForm(item)">
+                        <i class="oi oi-minus"></i>
+                      </button>
+                      <button class="btn btn-xs btn-outline-danger" (click)="openDeleteTrade(item)">
+                        <i class="oi oi-trash"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>         
         </div>
         <ng-template #loading>
           <div class="d-flex justify-content-center mt-3 mb-3">
