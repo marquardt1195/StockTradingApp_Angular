@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { TradeService } from '../services/TradeService/trade.service';
+import { TradeService } from '../../services/TradeService/trade.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Trade } from '../../Models/Trade'
-import { Transaction } from '../../Models/Transaction';
+import { Trade } from '../../../Models/Trade'
+import { Transaction } from '../../../Models/Transaction';
 
 
 

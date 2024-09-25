@@ -32,6 +32,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 //added to resolve errors from UI
+//look into limiting the application origin that this can only come from specific app
+//this is likely not good for live websites as anyone can access
 app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.UseAuthorization();

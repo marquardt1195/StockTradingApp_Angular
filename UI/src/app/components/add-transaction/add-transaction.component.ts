@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
-import { Transaction } from '../../Models/Transaction';
+import { Transaction } from '../../../Models/Transaction';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TransactionService } from '../services/TransactionService/transaction.service';
+import { TransactionService } from '../../services/TransactionService/transaction.service';
 
 @Component({
   selector: 'app-add-transaction',
@@ -13,6 +13,7 @@ export class AddTransactionComponent implements OnChanges {
   public newTransactionForm: FormGroup;
   public addTradeLeg: FormGroup;
   public reduceTradeLeg: FormGroup;
+  public editTradeLeg: FormGroup;
   isDisabled = true;
 
   @Input() showForm: boolean = false
@@ -59,6 +60,18 @@ export class AddTransactionComponent implements OnChanges {
       shares_sold: ['', Validators.required],
       exit_date: ['', Validators.required]
     });
+
+    this.editTradeLeg = this.formBuilder.group({
+      trade_id: [0, Validators.required],
+      stock_symbol: [{ value: '', disabled: this.isDisabled }, Validators.required],
+      entry_price: ['', Validators.required],
+      entry_date: ['', Validators.required],
+      shares_bought: ['', Validators.required],
+      dollar_stop_loss: ['', Validators.required],
+      exit_price: ['', Validators.required],
+      shares_sold: ['', Validators.required],
+      exit_date: ['', Validators.required]
+    })
   }
 
 
@@ -170,5 +183,6 @@ export class AddTransactionComponent implements OnChanges {
 
   public closeModal(): void {
     this.closeForm.emit();
+    this.transactionFormMode = null; 
   }
 }

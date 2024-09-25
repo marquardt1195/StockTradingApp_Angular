@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { OpenPositionsComponent } from './nav-menu/open-positions/open-positions.component'
-import { TradesComponent } from './nav-menu/trades/trades.component'
-import { AccountComponent } from './nav-menu/account/account.component';
-import { AnalyticsComponent } from './nav-menu/analytics/analytics.component';
+import { OpenPositionsComponent } from './components/nav-menu/open-positions/open-positions.component'
+import { TradesComponent } from './components/nav-menu/trades/trades.component'
+import { AccountComponent } from './components/nav-menu/account/account.component';
+import { AnalyticsComponent } from './components/nav-menu/analytics/analytics.component';
 
 const routes: Routes = [
   { path: 'account', component: AccountComponent },

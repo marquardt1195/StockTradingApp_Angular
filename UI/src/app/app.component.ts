@@ -63,7 +63,8 @@ export class AppComponent {
   public openTransactionsByTradeId(trade_id: number): void {
     this.showTransactionsModal = true;
     this.transactionsByTradeId$ = this.transactionService.getTransactionsByTradeId(trade_id);
-   // this.transactionsByTradeId$.subscribe();  // Ensure the request is made
+    // this.transactionsByTradeId$.subscribe();  // Ensure the request is made
+    //In Angular and RxJS, the concept of subscribing to an observable is central to how you interact with asynchronous data streams. When you subscribe to an observable, you're telling it: "I want to be notified whenever new data is emitted."
     this.transactionsByTradeId$.subscribe(data => {
       console.log('Transactions by Trade Id:', data);
     });
