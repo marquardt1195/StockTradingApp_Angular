@@ -19,9 +19,11 @@
 </app-add-transaction>
 
 <app-show-transactions
-  *ngIf="showTransactionsModal"
+  *ngIf="showTransactionsModal || showEditTransactionModal"
   [transactionsByTradeId$]="transactionsByTradeId$"
   [showTransactionsModal]="showTransactionsModal"
+  (editTransaction)="openEditTransactionModal($event)"
+  [transactionFormMode]="transactionFormMode"
   (closeForm)="showTransactionsModal = false">>
 </app-show-transactions>
 

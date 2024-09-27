@@ -14,8 +14,9 @@ import { TransactionService } from '../app/services/TransactionService/transacti
 export class AppComponent {
   public showForm = false;
   public tradeFormMode: 'addNewTrade' | 'deleteTrade' | null = null;
-  public transactionFormMode: 'addLeg' | 'reduceLeg' | null = null;
+  public transactionFormMode: 'addLeg' | 'reduceLeg' | 'editLeg' | null = null;
   public showTransactionsModal = false;
+  public showEditTransactionModal = false;
   public selectedTransaction!: Transaction;
   public transactions$!: Observable<Transaction[]>;
   public transactionsByTradeId$!: Observable<Transaction[]>;
@@ -55,19 +56,23 @@ export class AppComponent {
     this.showForm = true;
   }
 
-  //public openAddNewTradeForm(): void {
-  //  this.formMode = 'addNewTrade';
-  //  this.showForm = true;
-  //}
-
   public openTransactionsByTradeId(trade_id: number): void {
     this.showTransactionsModal = true;
+    this.showEditTransactionModal = false;
     this.transactionsByTradeId$ = this.transactionService.getTransactionsByTradeId(trade_id);
     // this.transactionsByTradeId$.subscribe();  // Ensure the request is made
     //In Angular and RxJS, the concept of subscribing to an observable is central to how you interact with asynchronous data streams. When you subscribe to an observable, you're telling it: "I want to be notified whenever new data is emitted."
     this.transactionsByTradeId$.subscribe(data => {
       console.log('Transactions by Trade Id:', data);
     });
+  }
+
+  public openEditTransactionModal(transaction: Transaction): void {
+    console.log('Show edit transaction modal opened for transaction:', transaction);
+    this.selectedTransaction = transaction;
+    this.transactionFormMode = 'editLeg';
+    this.showEditTransactionModal = true;
+    this.showTransactionsModal = false;
   }
 
   public onRefreshTransactions(): void {

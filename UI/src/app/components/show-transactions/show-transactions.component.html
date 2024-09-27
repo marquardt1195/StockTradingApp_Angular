@@ -1,4 +1,4 @@
-<div *ngIf="showTransactionsModal">
+<div *ngIf="showTransactionsModal && !showEditTransactionModal">
   <div class="custom-backdrop">
     <div class="modal fade show d-flex justify-content-center" tabindex="-1">
       <div style="margin-top: 8%; width: 50%;">
@@ -37,7 +37,7 @@
                           <td>{{item.shares_sold}}</td>
                           <td>{{item.exit_date | date: 'MM/dd/yyyy'}}</td>
                           <td style="display: flex;">
-                            <button class="btn btn-xs btn-secondary mx-1">
+                            <button class="btn btn-xs btn-secondary mx-1" (click)="showTransactionToEdit(item)">
                               <i class="oi oi-pencil"></i>
                             </button>
                             <button class="btn btn-xs btn-outline-danger">
@@ -48,7 +48,7 @@
                       </ng-container>
                     </ng-container>
                   </tbody>
-                </table>              
+                </table>
               </div>
             </div>
           </div>
@@ -57,4 +57,45 @@
     </div>
   </div>
 </div>
-  
+
+
+<div *ngIf="showEditTransactionModal && transactionFormMode == 'editLeg'">
+  <div class="modal fade show d-flex justify-content-center" tabindex="-1">
+    <div style="margin-top: 8%; width: 50%;">
+      <div class="modal-content modal-color">
+        <div>
+          <button type="button" class="btn-close m-2" style="float: right;" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr class="table-primary">
+                <th>Symbol</th>
+                <th>Entry Price</th>
+                <th>Shares Bought</th>
+                <th>Entry Date</th>
+                <th>Stop Loss</th>
+                <th>Exit Price</th>
+                <th>Shares Sold</th>
+                <th>Exit Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{selectedTransaction.stock_symbol}}</td>
+                <td>{{selectedTransaction.entry_price | currency: 'USD':'symbol':'1.2-2'}}</td>
+                <td>{{selectedTransaction.shares_bought}}</td>
+                <td>{{selectedTransaction.entry_date | date: 'MM/dd/yyyy'}}</td>
+                <td>{{selectedTransaction.dollar_stop_loss | currency: 'USD':'symbol':'1.2-2'}}</td>
+                <td>{{selectedTransaction.exit_price | currency: 'USD':'symbol':'1.2-2'}}</td>
+                <td>{{selectedTransaction.shares_sold}}</td>
+                <td>{{selectedTransaction.exit_date | date: 'MM/dd/yyyy'}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
