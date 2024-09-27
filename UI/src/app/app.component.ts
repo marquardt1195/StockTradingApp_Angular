@@ -14,7 +14,7 @@ import { TransactionService } from '../app/services/TransactionService/transacti
 export class AppComponent {
   public showForm = false;
   public tradeFormMode: 'addNewTrade' | 'deleteTrade' | null = null;
-  public transactionFormMode: 'addLeg' | 'reduceLeg' | 'editLeg' | null = null;
+  public transactionFormMode: 'addLeg' | 'reduceLeg' | null = null;
   public showTransactionsModal = false;
   public showEditTransactionModal = false;
   public selectedTransaction!: Transaction;
@@ -70,7 +70,6 @@ export class AppComponent {
   public openEditTransactionModal(transaction: Transaction): void {
     console.log('Show edit transaction modal opened for transaction:', transaction);
     this.selectedTransaction = transaction;
-    this.transactionFormMode = 'editLeg';
     this.showEditTransactionModal = true;
     this.showTransactionsModal = false;
   }

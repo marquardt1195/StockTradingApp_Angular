@@ -13,7 +13,7 @@ export class ShowTransactionsComponent {
   @Input() transactionsByTradeId$!: Observable<Transaction[]>;
   @Input() showTransactionsModal: boolean = false
   @Input() showEditTransactionModal: boolean = false
-  @Input() transactionFormMode: 'addLeg' | 'reduceLeg' | 'editLeg' | null = null;
+  @Input() transactionFormMode: 'addLeg' | 'reduceLeg' | null = null;
 
   @Output() editTransaction = new EventEmitter<Transaction>(); // This will emit an event when the new button is clicked
   @Output() closeForm = new EventEmitter<void>();
@@ -25,7 +25,6 @@ export class ShowTransactionsComponent {
     this.selectedTransaction = transaction;
     this.showTransactionsModal = false;
     this.showEditTransactionModal = true;
-    this.transactionFormMode = 'editLeg';
     this.editTransaction.emit(transaction);
 
     console.log('showTransactionsModal:', this.showTransactionsModal);

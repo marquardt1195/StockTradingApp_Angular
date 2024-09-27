@@ -1,4 +1,4 @@
-<div *ngIf="showTransactionsModal && !showEditTransactionModal">
+<div *ngIf="showTransactionsModal">
   <div class="custom-backdrop">
     <div class="modal fade show d-flex justify-content-center" tabindex="-1">
       <div style="margin-top: 8%; width: 50%;">
@@ -59,7 +59,7 @@
 </div>
 
 
-<div *ngIf="showEditTransactionModal && transactionFormMode == 'editLeg'">
+<div *ngIf="showEditTransactionModal">
   <div class="modal fade show d-flex justify-content-center" tabindex="-1">
     <div style="margin-top: 8%; width: 50%;">
       <div class="modal-content modal-color">
