@@ -23,6 +23,10 @@ export class TransactionService {
     return this.http.post<any>(`${this.apiUrl}/EditTradeLeg`, transaction);
   }
 
+  public removeTradeLeg(transaction: Transaction): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/RemoveTradeLeg`, transaction)
+  }
+
   //return type: transaction array
   public getAllTransactions(): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(`${this.apiUrl}/GetAllTransactions`);

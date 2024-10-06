@@ -67,5 +67,31 @@ namespace StockTradingApp_Angular.Services
                 var exceptionMessage = ex.Message;
             }
         }
+
+        public async Task EditTradeLeg(Transaction transaction)
+        {
+            try
+            {
+                _context.Update(transaction);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                var exceptionMessage = ex.Message;
+            }
+        }
+
+        public async Task RemoveTradeLeg(Transaction transaction)
+        {
+            try
+            {
+                _context.Transaction.Remove(transaction);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                var exceptionMessage = ex.Message;
+            }
+        }
     }
 }

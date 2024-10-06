@@ -40,5 +40,17 @@ namespace StockTradingApp_Angular.Controllers
         {
             await _transactionService.ReduceTradeLeg(transaction);
         }
+
+        [HttpPost("EditTradeLeg")]
+        public async Task EditTradeLeg(Data.Transaction transaction)
+        {
+            await _transactionService.EditTradeLeg(transaction);
+        }
+
+        [HttpPost("RemoveTradeLeg")]
+        public async Task RemoveTradeLeg(Data.Transaction transaction)
+        {
+            await _transactionService.RemoveTradeLeg(transaction);
+        }
     }
 }
