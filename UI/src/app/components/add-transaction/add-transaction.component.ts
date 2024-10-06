@@ -13,7 +13,6 @@ export class AddTransactionComponent implements OnChanges {
   public newTransactionForm: FormGroup;
   public addTradeLeg: FormGroup;
   public reduceTradeLeg: FormGroup;
-  public editTradeLeg: FormGroup;
   isDisabled = true;
 
   @Input() showForm: boolean = false
@@ -60,18 +59,6 @@ export class AddTransactionComponent implements OnChanges {
       shares_sold: ['', Validators.required],
       exit_date: ['', Validators.required]
     });
-
-    this.editTradeLeg = this.formBuilder.group({
-      trade_id: [0, Validators.required],
-      stock_symbol: [{ value: '', disabled: this.isDisabled }, Validators.required],
-      entry_price: ['', Validators.required],
-      entry_date: ['', Validators.required],
-      shares_bought: ['', Validators.required],
-      dollar_stop_loss: ['', Validators.required],
-      exit_price: ['', Validators.required],
-      shares_sold: ['', Validators.required],
-      exit_date: ['', Validators.required]
-    })
   }
 
 

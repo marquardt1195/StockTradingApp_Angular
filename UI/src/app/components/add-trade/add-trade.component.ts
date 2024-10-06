@@ -4,6 +4,7 @@ import { TradeService } from '../../services/TradeService/trade.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Trade } from '../../../Models/Trade'
 import { Transaction } from '../../../Models/Transaction';
+import { Observable } from 'rxjs';
 
 
 
@@ -16,7 +17,7 @@ export class AddTradeComponent {
   public newTradeForm: FormGroup;
   isDisabled = true;
 
-
+  @Input() transactionsByTradeId$!: Observable<Transaction[]>;
   @Input() showForm: boolean = false
   @Input() tradeFormMode: 'addNewTrade' | 'deleteTrade' | null = null;
   @Input() selectedTransaction!: Transaction;

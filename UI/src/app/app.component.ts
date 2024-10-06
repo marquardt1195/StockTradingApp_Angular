@@ -54,6 +54,10 @@ export class AppComponent {
     this.transactionFormMode = null; //needed to prevent add and reduce legs from showing when deleting..
     this.tradeFormMode = 'deleteTrade';
     this.showForm = true;
+    this.transactionsByTradeId$ = this.transactionService.getTransactionsByTradeId(transaction.trade_id);
+    this.transactionsByTradeId$.subscribe(data => {
+      console.log('Transactions by Trade Id:', data);
+    });
   }
 
   public openTransactionsByTradeId(trade_id: number): void {
