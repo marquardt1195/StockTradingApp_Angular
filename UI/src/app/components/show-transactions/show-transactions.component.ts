@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { TransactionService } from '../../services/TransactionService/transaction.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import {AlertService } from '../../services/AlertService'
+
 
 @Component({
   selector: 'app-show-transactions',
@@ -27,7 +29,8 @@ export class ShowTransactionsComponent implements OnChanges {
 
   constructor(
     private formBuilder: FormBuilder,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private alertService: AlertService,
   ) {
     this.editTradeLeg = this.formBuilder.group({
       trade_id: 0,
@@ -64,14 +67,16 @@ export class ShowTransactionsComponent implements OnChanges {
     this.showRemoveTransactionModal = true;
   }
 
-  onSubmitRemoveTradeLeg(transaction: Transaction): void {
+  public onSubmitRemoveTradeLeg(transaction: Transaction): void {
     this.transactionService.removeTradeLeg(transaction).subscribe({
       next: (response: any) => {
         console.log('Trade leg removed successfully.', response);
+        this.alertService.showToastSuccess('removeLeg');
         this.editTradeLeg.reset(); // Clear the form
         this.closeModal();
       },
       error: (error: HttpErrorResponse) => {
+        this.alertService.showToastError('removeLeg');
         console.error('Error removing trade leg', error);
       }
     });
@@ -94,13 +99,15 @@ export class ShowTransactionsComponent implements OnChanges {
         exit_date: editTradeLegValues.exit_date ? new Date(editTradeLegValues.exit_date) : null
       }
 
-      this.transactionService.submitEditTradeLeg(transaction).subscribe({
+    this.transactionService.submitEditTradeLeg(transaction).subscribe({
         next: (response: any) => {
-          console.log('Trade leg edited successfully.', response);
+        console.log('Trade leg edited successfully.', response);
+        this.alertService.showToastSuccess('editLeg');
           this.editTradeLeg.reset(); // Clear the form
           this.closeModal();
         },
-        error: (error: HttpErrorResponse) => {
+      error: (error: HttpErrorResponse) => {
+        this.alertService.showToastError('editLeg');
           console.error('Error editing trade leg', error);
         }
       });

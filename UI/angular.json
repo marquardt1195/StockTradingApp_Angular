@@ -37,6 +37,7 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/open-iconic/font/css/open-iconic-bootstrap.css",
+              "node_modules/ngx-toastr/toastr.css", // try adding '../' if you're using angular cli before 6
               "src/styles.css"
             ],
             "scripts": []

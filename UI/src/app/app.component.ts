@@ -5,6 +5,7 @@ import { Transaction } from '../Models/Transaction';
 import { AsyncPipe } from '@angular/common';
 import { TransactionService } from '../app/services/TransactionService/transaction.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +13,11 @@ import { TransactionService } from '../app/services/TransactionService/transacti
 })
 
 export class AppComponent {
+  constructor(private transactionService: TransactionService) {
+    this.tradeFormMode = null;
+    this.transactionFormMode = null;
+  }
+
   public showForm = false;
   public tradeFormMode: 'addNewTrade' | 'deleteTrade' | null = null;
   public transactionFormMode: 'addLeg' | 'reduceLeg' | null = null;
@@ -23,11 +29,6 @@ export class AppComponent {
 
   //a transaction observable.. denoted by the dollar sign.
   //can make use of transactions observable in html file
-
-  constructor(private transactionService: TransactionService) {
-    this.tradeFormMode = null;
-    this.transactionFormMode = null;
-  }
 
   public ngOnInit() {
     this.loadTransactions();
