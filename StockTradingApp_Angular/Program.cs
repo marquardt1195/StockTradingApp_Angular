@@ -1,11 +1,24 @@
+using StockTradingApp_Angular.Data;
+using Microsoft.EntityFrameworkCore;
+using StockTradingApp_Angular.Services.Interfaces;
+using StockTradingApp_Angular.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+//Response no longer camelCase
+builder.Services.AddControllers().AddJsonOptions(options => {
+    options.JsonSerializerOptions.PropertyNamingPolicy = null;
+});
+
+
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<ITradeService, TradeService>();
+
 
 var app = builder.Build();
 
@@ -17,6 +30,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//added to resolve errors from UI
+//look into limiting the application origin that this can only come from specific app
+//this is likely not good for live websites as anyone can access
+app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.UseAuthorization();
 

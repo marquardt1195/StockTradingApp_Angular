@@ -1,0 +1,174 @@
+<!--Show All Transactions-->
+<div *ngIf="showTransactionsModal">
+  <div class="custom-backdrop">
+    <div class="modal fade show d-flex justify-content-center" tabindex="-1">
+      <div style="margin-top: 8%; width: 50%;">
+        <div class="modal-content modal-color">
+          <div>
+            <button type="button" class="btn-close m-2" style="float: right;" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container mb-3 d-flex justify-content-center">
+              <div class="col-md-8">
+                <table class="table table-hover table-bordered">
+                  <thead>
+                    <tr class="table-primary">
+                      <th>Symbol</th>
+                      <th>Entry Price</th>
+                      <th>Shares Bought</th>
+                      <th>Entry Date</th>
+                      <th>Stop Loss</th>
+                      <th>Exit Price</th>
+                      <th>Shares Sold</th>
+                      <th>Exit Date</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngIf="transactionsByTradeId$ | async as transactionsByTradeId">
+
+                      <ng-container *ngFor="let item of transactionsByTradeId">
+                        <tr>
+                          <td>{{item.stock_symbol}}</td>
+                          <td>{{item.entry_price | currency: 'USD':'symbol':'1.2-2'}}</td>
+                          <td>{{item.shares_bought}}</td>
+                          <td>{{item.entry_date | date: 'MM/dd/yyyy'}}</td>
+                          <td>{{item.dollar_stop_loss | currency: 'USD':'symbol':'1.2-2'}}</td>
+                          <td>{{item.exit_price | currency: 'USD':'symbol':'1.2-2'}}</td>
+                          <td>{{item.shares_sold}}</td>
+                          <td>{{item.exit_date | date: 'MM/dd/yyyy'}}</td>
+                          <td style="display: flex;">
+                            <button class="btn btn-xs btn-secondary mx-1" (click)="openEditTradeLeg(item)">
+                              <i class="oi oi-pencil"></i>
+                            </button>
+                            <button class="btn btn-xs btn-outline-danger" (click)="openRemoveTradeLeg(item)">
+                              <i class="oi oi-trash"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Edit Trade Leg-->
+<div *ngIf="showEditTransactionModal && transactionFormMode == 'editLeg'">
+  <form [formGroup]="editTradeLeg" (ngSubmit)="onSubmitEditTradeLeg()">
+    <div class="custom-backdrop">
+      <div class="modal fade show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="margin-top: 152px;">
+          <div class="modal-content modal-color">
+            <div class="modal-header">
+              <h3 class="modal-title">Edit Transaction: {{selectedTransaction.stock_symbol}}</h3>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+              <div class="input-form">
+                <div class="container mb-3 d-flex justify-content-center">
+                  <div class="col-md-8">
+                    <div>
+                      <label for="symbol">Stock Symbol</label>
+                      <input type="text" class="form-control" id="symbol" formControlName="stock_symbol" [attr.disabled]="isDisabled ? true : null" >
+                    </div>
+                    <div>
+                      <label for="buyprice">Buy Price</label>
+                      <input type="text" class="form-control" id="buyprice" formControlName="entry_price" >
+                    </div>
+                    <div>
+                      <label for="buyamount"># Shares Bought</label>
+                      <input type="text" class="form-control" id="buyamount" formControlName="shares_bought" >
+                    </div>
+                    <div>
+                      <label for="buydate">Buy Date</label>
+                      <input type="text" class="form-control" id="buydate" formControlName="entry_date" >
+                    </div>
+                    <div>
+                      <label for="stoploss">$ Stop Loss</label>
+                      <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" >
+                    </div>
+                    <div>
+                      <label for="exitprice">Sell Price</label>
+                      <input type="text" class="form-control" id="exitprice" formControlName="exit_price" >
+                    </div>
+                    <div>
+                      <label for="sharessold"># Shares Sold</label>
+                      <input type="text" class="form-control" id="sharessold" formControlName="shares_sold" >
+                    </div>
+                    <div>
+                      <label for="selldate">Sell Date</label>
+                      <input type="text" class="form-control" id="selldate" formControlName="exit_date" >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!--Remove Trade Leg-->
+<div *ngIf="showRemoveTransactionModal">
+  <div class="custom-backdrop">
+    <div class="modal fade show d-flex justify-content-center" tabindex="-1">
+      <div style="margin-top: 8%; width: 50%;">
+        <div class="modal-content modal-color">
+          <div class="modal-header">
+            <h3 class="modal-title">Delete Transaction from {{selectedTransaction.entry_date | date: 'MM/dd/yyyy'}} for {{selectedTransaction.stock_symbol}}?</h3>
+            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container mb-3 d-flex justify-content-center">
+              <div class="col-md-8">
+                <table class="table table-hover table-bordered">
+                  <thead>
+                    <tr class="table-primary">
+                      <th>Symbol</th>
+                      <th>Entry Price</th>
+                      <th>Shares Bought</th>
+                      <th>Entry Date</th>
+                      <th>Stop Loss</th>
+                      <th>Exit Price</th>
+                      <th>Shares Sold</th>
+                      <th>Exit Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{selectedTransaction.stock_symbol}}</td>
+                      <td>{{selectedTransaction.entry_price | currency: 'USD':'symbol':'1.2-2'}}</td>
+                      <td>{{selectedTransaction.shares_bought}}</td>
+                      <td>{{selectedTransaction.entry_date | date: 'MM/dd/yyyy'}}</td>
+                      <td>{{selectedTransaction.dollar_stop_loss | currency: 'USD':'symbol':'1.2-2'}}</td>
+                      <td>{{selectedTransaction.exit_price | currency: 'USD':'symbol':'1.2-2'}}</td>
+                      <td>{{selectedTransaction.shares_sold}}</td>
+                      <td>{{selectedTransaction.exit_date | date: 'MM/dd/yyyy'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-danger" (click)="onSubmitRemoveTradeLeg(selectedTransaction)">Yes, Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

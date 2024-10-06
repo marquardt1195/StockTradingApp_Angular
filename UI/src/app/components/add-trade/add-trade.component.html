@@ -1,0 +1,93 @@
+<div *ngIf="showForm">
+  <div *ngIf="tradeFormMode == 'addNewTrade'">
+    <form [formGroup]="newTradeForm" (ngSubmit)="onSubmitNewTrade()">
+      <div class="custom-backdrop">
+        <div class="modal fade show d-block" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document" style="margin-top: 152px;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title">Initiate Trade</h3>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+              </div>
+              <div class="modal-body">
+                <div class="input-form">
+                  <div class="container mb-3 d-flex justify-content-center">
+                    <div class="col-md-8">
+                      <div>
+                        <label for="symbol">Stock Symbol</label>
+                        <input type="text" class="form-control" id="symbol" formControlName="stock_symbol" required>
+                        <div *ngIf="newTradeForm.get('stock_symbol')?.invalid && (newTradeForm.get('stock_symbol')?.touched || newTradeForm.get('stock_symbol')?.dirty)" class="error-message">
+                          Stock Symbol is required.
+                        </div>
+                      </div>
+
+                      <div>
+                        <label for="buyprice">Buy Price</label>
+                        <input type="text" class="form-control" id="buyprice" formControlName="cost_basis" required>
+                        <div *ngIf="newTradeForm.get('cost_basis')?.invalid && (newTradeForm.get('cost_basis')?.touched || newTradeForm.get('cost_basis')?.dirty)" class="error-message">
+                          Buy Price is required.
+                        </div>
+                      </div>
+
+                      <div>
+                        <label for="buyamount">Shares Bought</label>
+                        <input type="text" class="form-control" id="buyamount" formControlName="shares_bought" required>
+                        <div *ngIf="newTradeForm.get('shares_bought')?.invalid && (newTradeForm.get('shares_bought')?.touched || newTradeForm.get('shares_bought')?.dirty)" class="error-message">
+                          Number of Shares Bought is required.
+                        </div>
+                      </div>
+
+                      <div>
+                        <label for="buydate">Buy Date</label>
+                        <input type="text" class="form-control" id="buydate" formControlName="date_initiated" required>
+                        <div *ngIf="newTradeForm.get('date_initiated')?.invalid && (newTradeForm.get('date_initiated')?.touched || newTradeForm.get('date_initiated')?.dirty)" class="error-message">
+                          Buy Date is required.
+                        </div>
+                      </div>
+
+                      <div>
+                        <label for="stoploss">$ Stop Loss</label>
+                        <input type="text" class="form-control" id="stoploss" formControlName="dollar_stop_loss" required>
+                        <div *ngIf="newTradeForm.get('dollar_stop_loss')?.invalid && (newTradeForm.get('dollar_stop_loss')?.touched || newTradeForm.get('dollar_stop_loss')?.dirty)" class="error-message">
+                          Dollar Stop Loss is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>   
+    </form>
+  </div>
+
+  <div *ngIf="tradeFormMode == 'deleteTrade'">
+    <div class="custom-backdrop">
+      <div class="modal fade show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="margin-top: 152px;">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title">Delete {{selectedTransaction.stock_symbol}}</h3>
+              <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+              DELETE TRADE
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" (click)="onSubmitDeleteTrade()">Submit</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="closeModal()">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+</div>
+
+

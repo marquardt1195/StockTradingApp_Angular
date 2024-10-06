@@ -1,1 +1,62 @@
-/* You can add global styles to this file, and also import other style files */
+
+body {
+  background-color: #242935;
+}
+
+.card-color {
+  background-color: #D8DCDF;
+}
+
+.modal-color {
+    background-color: #f0f0f0;
+}
+
+.nav-color {
+    background-color: white;
+}
+
+.custom-backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed; /* Ensures it covers the entire screen */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1040; /* Ensure it is above other content but below the modal */
+}
+
+.ng-invalid.ng-touched, ng.ng-invalid.ng-dirty {
+    border-color: red;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+}
+
+input[disabled] {
+  background-color: #e9ecef; /* Light gray background for disabled inputs */
+  color: #515356;
+  cursor: not-allowed; /* Cursor to indicate that the field is not editable */
+}
+
+.btn-xs {
+  padding: 2px 5px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.table-wrapper {
+  border: 1px solid #96999D; /* Outer border */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Ensure rounded corners are visible */
+  padding: 0; /* No padding */
+  margin: 0; /* No margin */
+}
+
+.table-rounded {
+  border-collapse: separate; /* Ensure the border doesn't merge with cell borders */
+  border-spacing: 0; /* No spacing between cells */
+  width: 100%;
+  margin: 0; /* No margin */
+}
