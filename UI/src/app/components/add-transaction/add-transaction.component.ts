@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from
 import { Transaction } from '../../../Models/Transaction';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TransactionService } from '../../services/TransactionService/transaction.service';
+import { AlertService } from '../../services/AlertService'
 
 @Component({
   selector: 'app-add-transaction',
@@ -13,7 +14,6 @@ export class AddTransactionComponent implements OnChanges {
   public newTransactionForm: FormGroup;
   public addTradeLeg: FormGroup;
   public reduceTradeLeg: FormGroup;
-  public editTradeLeg: FormGroup;
   isDisabled = true;
 
   @Input() showForm: boolean = false
@@ -23,7 +23,8 @@ export class AddTransactionComponent implements OnChanges {
 
   constructor(
     private formBuilder: FormBuilder,
-    private transactionService: TransactionService
+    private transactionService: TransactionService,
+    private alertService: AlertService
   ) {
     this.newTransactionForm = this.formBuilder.group({
       transaction_id: '',
@@ -60,18 +61,6 @@ export class AddTransactionComponent implements OnChanges {
       shares_sold: ['', Validators.required],
       exit_date: ['', Validators.required]
     });
-
-    this.editTradeLeg = this.formBuilder.group({
-      trade_id: [0, Validators.required],
-      stock_symbol: [{ value: '', disabled: this.isDisabled }, Validators.required],
-      entry_price: ['', Validators.required],
-      entry_date: ['', Validators.required],
-      shares_bought: ['', Validators.required],
-      dollar_stop_loss: ['', Validators.required],
-      exit_price: ['', Validators.required],
-      shares_sold: ['', Validators.required],
-      exit_date: ['', Validators.required]
-    })
   }
 
 
@@ -104,11 +93,12 @@ export class AddTransactionComponent implements OnChanges {
 
       this.transactionService.submitAddTradeLeg(transaction).subscribe({
         next: (response: any) => {
-          console.log('Trade leg added successfully.', response);
+          this.alertService.showToastSuccess('addLeg');
           this.addTradeLeg.reset(); // Clear the form
           this.closeForm.emit(); // Emit the close event
         },
         error: (error: HttpErrorResponse) => {
+          this.alertService.showToastError('addLeg');
           console.error('Error adding trade leg', error);
         }
       });
@@ -141,11 +131,12 @@ export class AddTransactionComponent implements OnChanges {
 
       this.transactionService.submitReduceTradeLeg(transaction).subscribe({
         next: (response: any) => {
-          console.log('Trade leg reduced successfully.', response);
+          this.alertService.showToastSuccess('reduceLeg');
           this.reduceTradeLeg.reset();
           this.closeForm.emit();
         },
         error: (error: HttpErrorResponse) => {
+          this.alertService.showToastError('reduceLeg');
           console.error('Error reducing trade leg', error);
         }
       });

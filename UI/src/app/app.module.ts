@@ -13,6 +13,8 @@ import { OpenPositionsComponent } from './components/nav-menu/open-positions/ope
 import { TradesComponent } from './components/nav-menu/trades/trades.component';
 import { AnalyticsComponent } from './components/nav-menu/analytics/analytics.component';
 import { AccountComponent } from './components/nav-menu/account/account.component';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [ // Components, directives, and pipes go here
@@ -32,7 +34,9 @@ import { AccountComponent } from './components/nav-menu/account/account.componen
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(), 
   ],
   providers: [DatePipe, CurrencyPipe], // Services go here
   bootstrap: [AppComponent] // The main application view, called the root component, that hosts all other app views

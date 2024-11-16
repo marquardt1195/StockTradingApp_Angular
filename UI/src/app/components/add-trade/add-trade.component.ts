@@ -4,6 +4,8 @@ import { TradeService } from '../../services/TradeService/trade.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Trade } from '../../../Models/Trade'
 import { Transaction } from '../../../Models/Transaction';
+import { Observable } from 'rxjs';
+import { AlertService } from '../../services/AlertService'
 
 
 
@@ -16,7 +18,7 @@ export class AddTradeComponent {
   public newTradeForm: FormGroup;
   isDisabled = true;
 
-
+  @Input() transactionsByTradeId$!: Observable<Transaction[]>;
   @Input() showForm: boolean = false
   @Input() tradeFormMode: 'addNewTrade' | 'deleteTrade' | null = null;
   @Input() selectedTransaction!: Transaction;
@@ -26,6 +28,7 @@ export class AddTradeComponent {
   constructor(
     private formBuilder: FormBuilder,
     private tradeService: TradeService,
+    private alertService: AlertService
   ) {
     this.newTradeForm = this.formBuilder.group({
       trade_id: '',
@@ -57,12 +60,13 @@ export class AddTradeComponent {
 
       this.tradeService.submitNewTrade(trade).subscribe({
         next: (response: any) => {
-          console.log('Trade added successfully.', response);
+          this.alertService.showToastSuccess('initiate')
           this.newTradeForm.reset(); // Clear the form
           this.refreshTransactions.emit(); // Emit the refresh event
           this.closeForm.emit(); // Emit the close event
         },
         error: (error: HttpErrorResponse) => {
+          this.alertService.showToastError('initiate')
           console.error('Error adding trade', error);
         }
       });
@@ -79,11 +83,12 @@ export class AddTradeComponent {
     const trade_id: number = this.selectedTransaction.trade_id;
     this.tradeService.deleteTrade(trade_id).subscribe({
       next: (response: any) => {
-        console.log('Trade deleted successfully.', response);
+        this.alertService.showToastSuccess('removeTrade');
         this.refreshTransactions.emit(); // Emit the refresh event
         this.closeForm.emit(); // Emit the close event
       },
       error: (error: HttpErrorResponse) => {
+        this.alertService.showToastError('removeTrade');
         console.error('Error deleting trade', error);
       }
     });
